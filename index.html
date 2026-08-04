@@ -1,124 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Osuolale Quyum — AI Engineer</title>
-<style>
-  :root { --bg:#0d1117; --card:#161b22; --border:#30363d; --text:#e6edf3;
-          --muted:#9198a1; --accent:#4493f8; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text);
-         font:16px/1.6 -apple-system,"Segoe UI",Roboto,sans-serif; }
-  .wrap { max-width:880px; margin:0 auto; padding:48px 20px; }
-  h1 { font-size:2rem; margin-bottom:6px; }
-  .tagline { color:var(--accent); font-size:1.1rem; margin-bottom:14px; }
-  .intro { color:var(--muted); max-width:640px; margin-bottom:36px; }
-  h2 { font-size:1.2rem; margin:36px 0 16px; border-bottom:1px solid var(--border); padding-bottom:8px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
-  .card { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:20px; }
-  .card h3 { font-size:1rem; margin-bottom:8px; }
-  .card p { color:var(--muted); font-size:.92rem; }
-  .card a { color:var(--accent); text-decoration:none; font-size:.9rem; }
-  .card a:hover { text-decoration:underline; }
-  .badge { display:inline-block; background:#1f6feb26; color:var(--accent);
-           border:1px solid #1f6feb66; border-radius:20px; padding:2px 10px;
-           font-size:.75rem; margin:0 6px 6px 0; }
-  .cta { margin-top:40px; background:var(--card); border:1px solid var(--border);
-         border-radius:8px; padding:24px; text-align:center; }
-  .cta a { display:inline-block; background:var(--accent); color:#fff; padding:10px 24px;
-           border-radius:6px; text-decoration:none; font-weight:600; margin-top:10px; }
-  footer { margin-top:40px; color:var(--muted); font-size:.85rem; text-align:center; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osuolale Quyum — AI Engineer</title>
+    <meta name="description" content="AI Engineer building LLM applications, automation systems, and intelligent products.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #050505;
+            --bg-surface: rgba(255, 255, 255, 0.03);
+            --bg-surface-hover: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-1: #6366f1;
+            --accent-2: #ec4899;
+            --accent-3: #14b8a6;
+            --glow-1: rgba(99, 102, 241, 0.15);
+            --glow-2: rgba(236, 72, 153, 0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg);
+            background-image:
+                radial-gradient(circle at 15% 50%, var(--glow-1), transparent 25%),
+                radial-gradient(circle at 85% 30%, var(--glow-2), transparent 25%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        ::selection { background: var(--accent-1); color: #fff; }
+
+        .glass-panel {
+            background: var(--bg-surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .text-gradient-accent {
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-surface-hover);
+            border-color: var(--border-hover);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 5%;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        section {
+            padding: 140px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: clamp(16px, 2vw, 18px);
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 48px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            position: relative;
+            transition: all 0.3s ease;
+            transform: none;
+            border-color: var(--border);
+            box-shadow: none;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 28px;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-surface-hover);
+        }
+
+        .project-tag {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-1);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .project-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .project-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            flex: 1;
+        }
+
+        .project-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: var(--bg);
+            color: var(--text-muted);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .project-links a {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            transition: color 0.2s;
+        }
+
+        .project-links a:hover {
+            color: var(--accent-1);
+        }
+
+        h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 64px;
+            letter-spacing: -1px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            padding: 32px;
+        }
+
+        .skill-category h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            font-size: 13px;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            padding: clamp(40px, 8vw, 80px) 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(40px, 6vw, 64px);
+            margin-bottom: 24px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 500px;
+            margin: 0 auto 48px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 5%;
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+        }
+
+        footer p {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        @media (max-width: 800px) {
+            section { padding: 80px 5%; }
+            .nav-links { display: none; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Osuolale Quyum</h1>
-  <div class="tagline">AI Engineer — LLM integration · automation systems · intelligent products</div>
-  <p class="intro">I build AI-powered applications and automation systems that run in production.
-  Conversational AI chatbots, autonomous content pipelines, and intelligent data systems.
-  B.Sc. Mathematics (Second Class Upper, LAUTECH). Everything below is real,
-  shipped software in active use. Also known as <strong>koredeve</strong> on GitHub.</p>
+    <nav>
+        <div class="nav-brand">
+            <span class="text-gradient-accent">K</span>oredeve
+        </div>
+        <div class="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="cv.html" class="btn-secondary" style="padding: 8px 20px; font-size: 13px; height: auto;">CV</a>
+    </nav>
 
-  <h2>Live AI projects</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>🎬 YouTube Content Automation</h3>
-      <p>Fully autonomous multi-channel pipeline: content scheduling, processing workflows,
-      and deployment automation. Production system managing recurring automated tasks reliably.</p>
-    </div>
-    <div class="card">
-      <h3>🤖 MathSolverBot</h3>
-      <p>AI-powered mathematics tutoring chatbot using LLM API integration (Open Router).
-      Conversational interface providing step-by-step problem solving and explanations.</p>
-      <a href="https://mathsolverbot.vercel.app">Live demo →</a>
-    </div>
-    <div class="card">
-      <h3>📒 Telegram Trading Desk</h3>
-      <p>Risk-management &amp; trade-journal bot: position sizing, R-multiple analytics,
-      discipline flags, full button UI. Python, SQLite.</p>
-      <a href="https://github.com/koredeve/telegram-trading-desk">View code →</a>
-    </div>
-  </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="text-gradient">AI Engineer Building <span class="text-gradient-accent">Intelligent Systems</span></h1>
+            <p>I build AI-powered applications, automation systems, and data-driven solutions that run in production. LLM integration, conversational AI, intelligent workflows — turning complex problems into elegant systems.</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/koredeve" class="btn-primary">View on GitHub</a>
+                <a href="mailto:kelightsub@gmail.com" class="btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
 
-  <h2>Other live projects</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>📊 SignalAI</h3>
-      <p>Chart-analysis tool that routes candlestick screenshots through multiple LLMs
-      and compares their trade analysis side by side.</p>
-      <a href="https://signalai-kappa.vercel.app">Live demo →</a>
-    </div>
-    <div class="card">
-      <h3>💰 PennyDash</h3>
-      <p>AI-powered penny stock research dashboard with credibility scoring and market analysis.
-      Algorithmic position sizing calculator with real-time Reddit data processing.</p>
-      <a href="https://pennydash.vercel.app">Live demo →</a>
-    </div>
-    <div class="card">
-      <h3>🚗 Car Import Calculator (LandedIQ)</h3>
-      <p>Bidding price calculator + Nigerian duties, levies &amp; fees breakdown. Real-time calculations
-      for landed price, import duties, taxes, and total cost of importation.</p>
-      <a href="https://portfolio-sable-phi-30qno3uai0.vercel.app">Live tool →</a>
-    </div>
-    <div class="card">
-      <h3>🌦 Weathering</h3>
-      <p>Real-time weather app — async API data, error states, responsive layout.</p>
-      <a href="https://weather-site-kappa.vercel.app">Live demo →</a>
-    </div>
-  </div>
+    <section id="projects">
+        <h2>Featured <span class="text-gradient-accent">Projects</span></h2>
+        <div class="projects-grid">
+            <div class="glass-panel project-card">
+                <div class="project-tag">Automation · Production</div>
+                <div class="project-title">YouTube Content Automation</div>
+                <div class="project-description">Fully autonomous multi-channel pipeline handling real-time content scheduling, processing workflows, and deployment automation. Production system managing recurring automated tasks reliably.</div>
+                <div class="project-badges">
+                    <span class="badge">Python</span>
+                    <span class="badge">Automation</span>
+                    <span class="badge">Deployment</span>
+                </div>
+            </div>
 
-  <h2>What I work with</h2>
-  <div>
-    <span class="badge">Python</span><span class="badge">JavaScript / TypeScript</span>
-    <span class="badge">LLM Integration</span><span class="badge">Open Router API</span>
-    <span class="badge">Conversational AI</span><span class="badge">Telegram Bot API</span>
-    <span class="badge">API Integration</span><span class="badge">Real-time Data Processing</span>
-    <span class="badge">Docker</span><span class="badge">Vercel</span>
-    <span class="badge">GitHub</span><span class="badge">System Architecture</span>
-  </div>
+            <div class="glass-panel project-card">
+                <div class="project-tag" style="color: #14b8a6;">AI · LLM</div>
+                <div class="project-title">MathSolverBot</div>
+                <div class="project-description">AI-powered mathematics tutoring chatbot using LLM API integration (Open Router). Conversational interface providing step-by-step problem solving and explanations.</div>
+                <div class="project-badges">
+                    <span class="badge">Next.js</span>
+                    <span class="badge">LLM</span>
+                    <span class="badge">Open Router</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://mathsolverbot.vercel.app" target="_blank">Live Demo ↗</a>
+                </div>
+            </div>
 
-  <h2>Services</h2>
-  <div class="grid">
-    <div class="card"><h3>Custom Telegram bots</h3><p>Alert bots, automation tools,
-    community applications — designed, built, deployed, and documented.</p></div>
-    <div class="card"><h3>AI-powered applications</h3><p>LLM integration, conversational AI,
-    intelligent data analysis systems, chatbot development.</p></div>
-    <div class="card"><h3>Workflow automation</h3><p>If you do it by hand every day, I can
-    make it run itself — scheduling, processing, API integration, deployment.</p></div>
-  </div>
+            <div class="glass-panel project-card">
+                <div class="project-tag" style="color: #f59e0b;">AI · Finance</div>
+                <div class="project-title">PennyDash</div>
+                <div class="project-description">AI-powered penny stock research dashboard with credibility scoring and market analysis. Algorithmic position sizing calculator with real-time Reddit data processing.</div>
+                <div class="project-badges">
+                    <span class="badge">Next.js</span>
+                    <span class="badge">AI Analysis</span>
+                    <span class="badge">APIs</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://pennydash.vercel.app" target="_blank">Live Demo ↗</a>
+                </div>
+            </div>
 
-  <div class="cta">
-    <div><strong>Have something repetitive or manual? Let's automate it.</strong></div>
-    <a href="mailto:kelightsub@gmail.com">Get in touch</a>
-    <div style="margin-top:10px">
-      <a style="background:none;color:var(--accent);padding:0" href="cv.html">View CV</a>
-      &nbsp;·&nbsp;
-      <a style="background:none;color:var(--accent);padding:0"
-      href="https://github.com/koredeve">github.com/koredeve</a></div>
-  </div>
+            <div class="glass-panel project-card">
+                <div class="project-tag" style="color: #0ea5e9;">Tool · Finance</div>
+                <div class="project-title">LandedIQ</div>
+                <div class="project-description">Car import bidding calculator + Nigerian duties, levies & fees breakdown. Real-time calculations for landed price, import duties, taxes, and total cost of importation.</div>
+                <div class="project-badges">
+                    <span class="badge">Next.js</span>
+                    <span class="badge">Calculator</span>
+                    <span class="badge">Finance</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://portfolio-sable-phi-30qno3uai0.vercel.app" target="_blank">Live Tool ↗</a>
+                </div>
+            </div>
 
-  <footer>© 2026 Osuolale Quyum (koredeve) — AI systems that run in production.</footer>
-</div>
+            <div class="glass-panel project-card">
+                <div class="project-tag" style="color: #ec4899;">SignalAI</div>
+                <div class="project-title">SignalAI</div>
+                <div class="project-description">Chart-analysis tool that routes candlestick screenshots through multiple LLMs and compares their trade analysis side by side.</div>
+                <div class="project-badges">
+                    <span class="badge">Next.js</span>
+                    <span class="badge">LLM</span>
+                    <span class="badge">Vision</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://signalai-kappa.vercel.app" target="_blank">Live Demo ↗</a>
+                </div>
+            </div>
+
+            <div class="glass-panel project-card">
+                <div class="project-tag" style="color: #8b5cf6;">Utility</div>
+                <div class="project-title">Weathering</div>
+                <div class="project-description">Real-time weather app with live data, 5-day forecasts, and async error handling. Clean interface for weather information across devices.</div>
+                <div class="project-badges">
+                    <span class="badge">JavaScript</span>
+                    <span class="badge">API</span>
+                    <span class="badge">Responsive</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://weather-site-kappa.vercel.app" target="_blank">Live Demo ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 style="text-align: center;">Technical <span class="text-gradient-accent">Arsenal</span></h2>
+        <div class="skills-grid">
+            <div class="glass-panel skill-category">
+                <h3>Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                </div>
+            </div>
+            <div class="glass-panel skill-category">
+                <h3>Frameworks</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Next.js</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Telegram Bot API</span>
+                </div>
+            </div>
+            <div class="glass-panel skill-category">
+                <h3>AI & LLM</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Claude API</span>
+                    <span class="skill-tag">Open Router</span>
+                    <span class="skill-tag">LLM Integration</span>
+                    <span class="skill-tag">Conversational AI</span>
+                </div>
+            </div>
+            <div class="glass-panel skill-category">
+                <h3>Tools & Deployment</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Vercel</span>
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+            <div class="glass-panel skill-category">
+                <h3>Data & APIs</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">API Integration</span>
+                    <span class="skill-tag">Real-time Data</span>
+                    <span class="skill-tag">Databases</span>
+                    <span class="skill-tag">Data Processing</span>
+                </div>
+            </div>
+            <div class="glass-panel skill-category">
+                <h3>Specializations</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">System Architecture</span>
+                    <span class="skill-tag">Automation</span>
+                    <span class="skill-tag">Problem Solving</span>
+                    <span class="skill-tag">Full-Stack</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="glass-panel cta-section">
+            <h2>Ready to Build?</h2>
+            <p>Whether you have a project in mind or just want to say hi, I'm currently open to new opportunities and would love to hear from you.</p>
+            <div class="cta-buttons">
+                <a href="mailto:kelightsub@gmail.com" class="btn-primary">Email Me</a>
+                <a href="https://github.com/koredeve" class="btn-secondary" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/osuolale-quyum" class="btn-secondary" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Osuolale Quyum (koredeve) — AI Systems in Production</p>
+    </footer>
 </body>
 </html>
