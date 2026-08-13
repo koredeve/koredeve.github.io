@@ -557,6 +557,14 @@
         <div class="bot-pulse"></div>
     </div>
 
+    <!-- Chat Modal Overlay -->
+    <div id="chatModal" class="chat-modal-overlay">
+        <div class="chat-modal-container">
+            <button id="closeChatBtn" class="close-chat-btn">✕</button>
+            <iframe id="chatFrame" src="/chat.html" class="chat-iframe"></iframe>
+        </div>
+    </div>
+
     <style>
         /* Floating Chatbot Widget Styles */
         .chatbot-widget {
@@ -685,6 +693,93 @@
             opacity: 1;
         }
 
+        /* Chat Modal Styles */
+        .chat-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .chat-modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .chat-modal-container {
+            position: relative;
+            width: 90%;
+            max-width: 700px;
+            height: 80vh;
+            max-height: 800px;
+            background: #050505;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            animation: modalSlideIn 0.4s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .chat-modal-overlay.active .chat-modal-container {
+            animation: modalSlideIn 0.4s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .close-chat-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 10001;
+            backdrop-filter: blur(12px);
+        }
+
+        .close-chat-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .chat-iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+
         /* Mobile responsive */
         @media (max-width: 768px) {
             .chatbot-widget {
@@ -710,19 +805,52 @@
                 padding: 6px 10px;
                 right: 75px;
             }
+
+            .chat-modal-container {
+                width: 95%;
+                height: 90vh;
+                max-height: 90vh;
+            }
         }
     </style>
 
     <script>
-        // Handle bot widget click
-        document.getElementById('chatbotWidget').addEventListener('click', () => {
-            window.location.href = '/chat.html';
+        const chatModal = document.getElementById('chatModal');
+        const chatbotWidget = document.getElementById('chatbotWidget');
+        const closeChatBtn = document.getElementById('closeChatBtn');
+
+        // Open chat modal
+        chatbotWidget.addEventListener('click', () => {
+            chatModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close chat modal
+        closeChatBtn.addEventListener('click', () => {
+            chatModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close modal when clicking outside
+        chatModal.addEventListener('click', (e) => {
+            if (e.target === chatModal) {
+                chatModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         });
 
         // Add animation class after page load
         window.addEventListener('load', () => {
             const widget = document.getElementById('chatbotWidget');
             widget.style.animation = 'slideIn 0.6s ease-out';
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && chatModal.classList.contains('active')) {
+                chatModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         });
     </script>
 </body>
