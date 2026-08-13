@@ -748,15 +748,15 @@
 
         .close-chat-btn {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
+            top: 12px;
+            right: 12px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: #1f1f2e;
+            border: 2px solid rgba(99, 102, 241, 0.6);
             color: white;
-            font-size: 24px;
+            font-size: 26px;
             line-height: 1;
             cursor: pointer;
             display: flex;
@@ -764,16 +764,21 @@
             justify-content: center;
             transition: all 0.2s ease;
             z-index: 10002;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             padding: 0;
+            font-weight: bold;
+            pointer-events: all;
+            flex-shrink: 0;
+        }
+
+        .close-chat-btn:active {
+            transform: scale(0.95);
         }
 
         .close-chat-btn:hover {
-            background: rgba(0, 0, 0, 0.9);
-            transform: scale(1.15) rotate(90deg);
-            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.5);
-            border-color: rgba(255, 255, 255, 0.6);
+            background: #2a2a3e;
+            transform: scale(1.1);
+            box-shadow: 0 0 16px rgba(99, 102, 241, 0.6);
+            border-color: rgba(99, 102, 241, 0.9);
         }
 
         .chat-iframe {
@@ -818,43 +823,65 @@
     </style>
 
     <script>
-        const chatModal = document.getElementById('chatModal');
-        const chatbotWidget = document.getElementById('chatbotWidget');
-        const closeChatBtn = document.getElementById('closeChatBtn');
+        function initChatModal() {
+            const chatModal = document.getElementById('chatModal');
+            const chatbotWidget = document.getElementById('chatbotWidget');
+            const closeChatBtn = document.getElementById('closeChatBtn');
 
-        // Open chat modal
-        chatbotWidget.addEventListener('click', () => {
-            chatModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+            if (!chatModal || !chatbotWidget || !closeChatBtn) {
+                console.error('Chat modal elements not found');
+                return;
+            }
 
-        // Close chat modal
-        closeChatBtn.addEventListener('click', () => {
-            chatModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
+            // Open modal
+            function openModal() {
+                console.log('Opening modal...');
+                chatModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
 
-        // Close modal when clicking outside
-        chatModal.addEventListener('click', (e) => {
-            if (e.target === chatModal) {
+            // Close modal
+            function closeModal() {
+                console.log('Closing modal...');
                 chatModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
-        });
 
-        // Add animation class after page load
-        window.addEventListener('load', () => {
-            const widget = document.getElementById('chatbotWidget');
-            widget.style.animation = 'slideIn 0.6s ease-out';
-        });
+            // Click bot widget to open
+            chatbotWidget.addEventListener('click', openModal);
 
-        // Close modal on ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && chatModal.classList.contains('active')) {
-                chatModal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-        });
+            // Click close button to close
+            closeChatBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeModal();
+            });
+
+            // Click outside to close
+            chatModal.addEventListener('click', (e) => {
+                if (e.target === chatModal) {
+                    closeModal();
+                }
+            });
+
+            // ESC key to close
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && chatModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // Widget animation on load
+            window.addEventListener('load', () => {
+                chatbotWidget.style.animation = 'slideIn 0.6s ease-out';
+            });
+        }
+
+        // Wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initChatModal);
+        } else {
+            initChatModal();
+        }
     </script>
 </body>
 </html>
