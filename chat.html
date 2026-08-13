@@ -359,33 +359,60 @@
 
             if (conversationHistory.length > 4) conversationStage = 'name';
 
-            if (leadData.name && leadData.email && leadData.projectDescription && leadData.budget) {
-                captureLead();
+            // Check if bot confirmed the lead (mentioned email and will reach out)
+            if (botResponse.includes('reach out') && botResponse.includes('@gmail.com')) {
+                // Give a slight delay for data extraction to finish
+                setTimeout(() => {
+                    if (leadData.name && leadData.email && leadData.projectDescription && leadData.budget) {
+                        console.log('All lead data collected, capturing:', leadData);
+                        captureLead();
+                    } else {
+                        console.log('Incomplete lead data:', leadData);
+                    }
+                }, 100);
             }
         }
 
         function extractLeadInfo(message) {
-            if (conversationStage === 'name' && !leadData.name && message.length < 50) {
-                leadData.name = message;
-                conversationStage = 'email';
-            }
-
-            if (conversationStage === 'email' && !leadData.email) {
-                const match = message.match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
-                if (match) {
-                    leadData.email = match[0];
-                    conversationStage = 'project';
+            // Extract email (most reliable)
+            if (!leadData.email) {
+                const emailMatch = message.match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
+                if (emailMatch) {
+                    leadData.email = emailMatch[0];
                 }
             }
 
-            if (conversationStage === 'project' && !leadData.projectDescription && message.length > 10) {
-                leadData.projectDescription = message.substring(0, 200);
-                conversationStage = 'budget';
+            // Extract name (look for capitalized words, but skip common words)
+            if (!leadData.name && message.length < 100) {
+                const words = message.split(/[\s,]+/);
+                const potentialName = words.find(word =>
+                    word.length > 2 &&
+                    word[0] === word[0].toUpperCase() &&
+                    !['The', 'A', 'An', 'For', 'With', 'Build', 'Create'].includes(word)
+                );
+                if (potentialName && !potentialName.includes('.')) {
+                    leadData.name = potentialName;
+                }
             }
 
-            if (conversationStage === 'budget' && !leadData.budget && message.length > 3) {
-                leadData.budget = message.substring(0, 100);
+            // Extract project description (anything substantial)
+            if (!leadData.projectDescription && message.length > 10) {
+                // Skip if it's just a number (budget) or email
+                if (!message.match(/^\$?\d+/) && !message.includes('@')) {
+                    leadData.projectDescription = message.substring(0, 200);
+                }
             }
+
+            // Extract budget (look for numbers with $ or just numbers)
+            if (!leadData.budget) {
+                const budgetMatch = message.match(/\$?[\d,]+(?:\.\d{2})?/);
+                if (budgetMatch) {
+                    leadData.budget = budgetMatch[0];
+                }
+            }
+
+            // Log for debugging
+            console.log('Lead data so far:', leadData);
         }
 
         async function captureLead() {
