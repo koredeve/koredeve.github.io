@@ -349,8 +349,8 @@
 
             conversationHistory.push({ role: 'user', content: message });
 
-            // Extract from user message
-            extractLeadInfo(message);
+            // Extract from user message (most important)
+            extractLeadInfo(message, true);  // true = user message
             console.log('After user extraction:', leadData);
 
             showTyping();
@@ -362,9 +362,15 @@
 
             if (conversationHistory.length > 4) conversationStage = 'name';
 
-            // Extract data from bot response too (IMPORTANT - bot mentions email)
-            extractLeadInfo(botResponse);
-            console.log('After bot extraction:', leadData);
+            // Extract ONLY email from bot response (bot repeats email back)
+            // Don't extract other fields from bot messages - they're not accurate data
+            if (!leadData.email && botResponse.includes('@')) {
+                const emailMatch = botResponse.match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
+                if (emailMatch) {
+                    leadData.email = emailMatch[0];
+                }
+            }
+            console.log('After bot extraction (email only):', leadData);
 
             // Check if bot confirmed the lead (mentioned email or will reach out)
             const isConfirmation = botResponse.includes('reach out') ||
@@ -406,8 +412,8 @@
             }
         }
 
-        function extractLeadInfo(message) {
-            // Extract email (most reliable)
+        function extractLeadInfo(message, isUserMessage = false) {
+            // Extract email (from either user or bot)
             if (!leadData.email) {
                 const emailMatch = message.match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
                 if (emailMatch) {
@@ -415,36 +421,42 @@
                 }
             }
 
-            // Extract name (look for capitalized words, but skip common words and pure digits)
-            if (!leadData.name && message.length < 100) {
-                const words = message.split(/[\s,]+/);
-                const potentialName = words.find(word =>
-                    word.length > 2 &&
-                    word.length < 50 &&
-                    word[0] === word[0].toUpperCase() &&
-                    !/^\d+$/.test(word) && // Skip pure numbers like "1000"
-                    !['The', 'A', 'An', 'For', 'With', 'Build', 'Create', 'He', 'I'].includes(word)
-                );
-                if (potentialName && !potentialName.includes('.')) {
-                    leadData.name = potentialName;
+            // Only extract name and project from USER messages (not bot)
+            if (isUserMessage) {
+                // Extract name (look for capitalized words, but skip common words and pure digits)
+                if (!leadData.name && message.length < 100) {
+                    const words = message.split(/[\s,]+/);
+                    const potentialName = words.find(word =>
+                        word.length > 1 &&
+                        word.length < 50 &&
+                        word[0] === word[0].toUpperCase() &&
+                        !/^\d+$/.test(word) && // Skip pure numbers like "1000"
+                        !['The', 'A', 'An', 'For', 'With', 'Build', 'Create', 'He', 'I', 'My', 'Your'].includes(word)
+                    );
+                    if (potentialName && !potentialName.includes('.') && !potentialName.includes('@')) {
+                        leadData.name = potentialName;
+                        console.log('Extracted name:', potentialName);
+                    }
                 }
-            }
 
-            // Extract project description (anything substantial that's not pure numbers/money)
-            if (!leadData.projectDescription && message.length > 10) {
-                // Skip if it's just a number (budget), email, or money amounts
-                const isJustNumbers = /^[\$\d,.\s–-]+$/.test(message.trim());
-                if (!isJustNumbers && !message.includes('@')) {
-                    leadData.projectDescription = message.substring(0, 200);
+                // Extract project description (from user's substantive answer, not greeting)
+                if (!leadData.projectDescription && message.length > 5) {
+                    // Skip if it's just a number (budget), email, or very short
+                    const isJustNumbers = /^[\$\d,.\s–-]+$/.test(message.trim());
+                    if (!isJustNumbers && !message.includes('@') && !message.toLowerCase().includes('hello') && !message.toLowerCase().includes('hi')) {
+                        leadData.projectDescription = message.substring(0, 200);
+                        console.log('Extracted project:', message.substring(0, 50));
+                    }
                 }
-            }
 
-            // Extract budget (look for 3+ digit numbers with optional $ or commas)
-            if (!leadData.budget) {
-                // Match patterns like 1000, $1000, $1,000, etc - must be 3+ digits
-                const budgetMatch = message.match(/\$?[\d]{3,}(?:,\d{3})?(?:\.\d{2})?/);
-                if (budgetMatch) {
-                    leadData.budget = budgetMatch[0];
+                // Extract budget (look for 3+ digit numbers with optional $ or commas)
+                if (!leadData.budget) {
+                    // Match patterns like 1000, $1000, $1,000, etc - must be 3+ digits
+                    const budgetMatch = message.match(/\$?[\d]{3,}(?:,\d{3})?(?:\.\d{2})?/);
+                    if (budgetMatch) {
+                        leadData.budget = budgetMatch[0];
+                        console.log('Extracted budget:', budgetMatch[0]);
+                    }
                 }
             }
 
