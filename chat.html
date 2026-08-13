@@ -493,17 +493,44 @@
             if (leadCaptured) return; // Don't capture twice
             leadCaptured = true;
 
-            console.log('🎯 CAPTURING LEAD:', leadData);
+            console.log('🎯 VALIDATING LEAD DATA WITH AI...');
 
             try {
-                const response = await fetch(`${BACKEND_URL}/api/leads`, {
+                // Step 1: Ask Claude to validate and format the data
+                console.log('📋 Sending conversation to AI for validation...');
+                const validationResponse = await fetch(`${BACKEND_URL}/api/validate-lead`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(leadData)
+                    body: JSON.stringify({
+                        conversationHistory: conversationHistory
+                    })
                 });
 
-                const result = await response.json();
-                console.log('✅ Lead sent to backend:', result);
+                const validationResult = await validationResponse.json();
+                console.log('🤖 Claude validated data:', validationResult.data);
+
+                if (!validationResult.success || !validationResult.data.isValid) {
+                    console.warn('⚠️ Claude flagged invalid data:', validationResult.data);
+                    // Still send it but log the warning
+                }
+
+                // Step 2: Send validated data to Formspree
+                const cleanData = {
+                    name: validationResult.data.name || 'Unknown',
+                    email: validationResult.data.email,
+                    projectDescription: validationResult.data.projectDescription,
+                    budget: validationResult.data.budget
+                };
+
+                console.log('📤 Sending validated lead to Formspree:', cleanData);
+                const leadResponse = await fetch(`${BACKEND_URL}/api/leads`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(cleanData)
+                });
+
+                const leadResult = await leadResponse.json();
+                console.log('✅ Lead successfully sent to Formspree:', leadResult);
             } catch (error) {
                 console.error('❌ Error capturing lead:', error);
             }
