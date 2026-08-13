@@ -788,6 +788,11 @@
             border-radius: 20px;
         }
 
+        /* Smooth transitions for movement */
+        .chatbot-widget {
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
         /* Mobile responsive */
         @media (max-width: 768px) {
             .chatbot-widget {
@@ -838,6 +843,7 @@
                 console.log('Opening modal...');
                 chatModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                clearInterval(moveInterval); // Stop moving when modal opens
             }
 
             // Close modal
@@ -845,6 +851,7 @@
                 console.log('Closing modal...');
                 chatModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
+                startMoving(); // Resume movement when modal closes
             }
 
             // Click bot widget to open
@@ -870,9 +877,48 @@
                 }
             });
 
+            // ===== RANDOM MOVEMENT =====
+            let moveInterval;
+
+            function getRandomPosition() {
+                // Get viewport dimensions (minus widget size and padding)
+                const padding = 20;
+                const widgetSize = 70;
+                const maxX = window.innerWidth - widgetSize - padding;
+                const maxY = window.innerHeight - widgetSize - padding;
+
+                // Generate random positions
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+
+                return { x: randomX, y: randomY };
+            }
+
+            function moveWidget() {
+                const pos = getRandomPosition();
+                chatbotWidget.style.bottom = 'auto';
+                chatbotWidget.style.right = 'auto';
+                chatbotWidget.style.left = pos.x + 'px';
+                chatbotWidget.style.top = pos.y + 'px';
+            }
+
+            function startMoving() {
+                // Move every 4-6 seconds with randomization
+                moveInterval = setInterval(() => {
+                    moveWidget();
+                }, 4000 + Math.random() * 2000);
+            }
+
             // Widget animation on load
             window.addEventListener('load', () => {
                 chatbotWidget.style.animation = 'slideIn 0.6s ease-out';
+                // Start moving after initial animation
+                setTimeout(startMoving, 800);
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                moveWidget();
             });
         }
 
