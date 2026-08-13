@@ -550,5 +550,180 @@
     <footer>
         <p>© 2026 Osuolale Quyum (koredeve) — AI Systems in Production</p>
     </footer>
+
+    <!-- Floating Bot Widget -->
+    <div id="chatbotWidget" class="chatbot-widget">
+        <div class="bot-icon">🤖</div>
+        <div class="bot-pulse"></div>
+    </div>
+
+    <style>
+        /* Floating Chatbot Widget Styles */
+        .chatbot-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bot-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            animation: bounce 2s infinite;
+        }
+
+        .chatbot-widget:hover .bot-icon {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(99, 102, 241, 0.5);
+        }
+
+        .bot-pulse {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            animation: pulse 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        .chatbot-widget::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 5px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-top: 8px solid rgba(99, 102, 241, 0.3);
+            opacity: 0;
+            animation: bubble-appear 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bubble-appear {
+            0%, 10%, 100% {
+                opacity: 0;
+                transform: translateY(0px);
+            }
+            20%, 80% {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        /* Tooltip */
+        .chatbot-widget::before {
+            content: 'Chat with me!';
+            position: absolute;
+            right: 90px;
+            bottom: 15px;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .chatbot-widget:hover::before {
+            opacity: 1;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .chatbot-widget {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+            }
+
+            .bot-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 28px;
+            }
+
+            .bot-pulse {
+                width: 60px;
+                height: 60px;
+            }
+
+            .chatbot-widget::before {
+                font-size: 12px;
+                padding: 6px 10px;
+                right: 75px;
+            }
+        }
+    </style>
+
+    <script>
+        // Handle bot widget click
+        document.getElementById('chatbotWidget').addEventListener('click', () => {
+            window.location.href = '/chat.html';
+        });
+
+        // Add animation class after page load
+        window.addEventListener('load', () => {
+            const widget = document.getElementById('chatbotWidget');
+            widget.style.animation = 'slideIn 0.6s ease-out';
+        });
+    </script>
 </body>
 </html>
