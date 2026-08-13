@@ -359,17 +359,39 @@
 
             if (conversationHistory.length > 4) conversationStage = 'name';
 
-            // Check if bot confirmed the lead (mentioned email and will reach out)
-            if (botResponse.includes('reach out') && botResponse.includes('@gmail.com')) {
+            // Extract data from bot response too (in case bot mentions details)
+            extractLeadInfo(botResponse);
+
+            // Check if bot confirmed the lead (mentioned email or will reach out)
+            const isConfirmation = botResponse.includes('reach out') ||
+                                  botResponse.includes('will contact') ||
+                                  botResponse.includes('get in touch') ||
+                                  botResponse.includes('@gmail.com');
+
+            console.log('Bot response includes confirmation indicators:', isConfirmation);
+            console.log('Current lead data:', leadData);
+
+            if (isConfirmation) {
                 // Give a slight delay for data extraction to finish
                 setTimeout(() => {
+                    console.log('Checking if ready to capture lead...');
+                    console.log('Has name:', !!leadData.name);
+                    console.log('Has email:', !!leadData.email);
+                    console.log('Has project:', !!leadData.projectDescription);
+                    console.log('Has budget:', !!leadData.budget);
+
                     if (leadData.name && leadData.email && leadData.projectDescription && leadData.budget) {
-                        console.log('All lead data collected, capturing:', leadData);
+                        console.log('✅ ALL DATA READY - Capturing lead:', leadData);
                         captureLead();
                     } else {
-                        console.log('Incomplete lead data:', leadData);
+                        console.log('❌ INCOMPLETE - Missing:', {
+                            name: !leadData.name,
+                            email: !leadData.email,
+                            project: !leadData.projectDescription,
+                            budget: !leadData.budget
+                        });
                     }
-                }, 100);
+                }, 200);
             }
         }
 
@@ -416,16 +438,22 @@
         }
 
         async function captureLead() {
+            if (leadCaptured) return; // Don't capture twice
             leadCaptured = true;
 
+            console.log('🎯 CAPTURING LEAD:', leadData);
+
             try {
-                await fetch(`${BACKEND_URL}/api/leads`, {
+                const response = await fetch(`${BACKEND_URL}/api/leads`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(leadData)
                 });
+
+                const result = await response.json();
+                console.log('✅ Lead sent to backend:', result);
             } catch (error) {
-                console.error('Error capturing lead:', error);
+                console.error('❌ Error capturing lead:', error);
             }
 
             const badge = document.createElement('div');
