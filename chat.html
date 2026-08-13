@@ -415,30 +415,34 @@
                 }
             }
 
-            // Extract name (look for capitalized words, but skip common words)
+            // Extract name (look for capitalized words, but skip common words and pure digits)
             if (!leadData.name && message.length < 100) {
                 const words = message.split(/[\s,]+/);
                 const potentialName = words.find(word =>
                     word.length > 2 &&
+                    word.length < 50 &&
                     word[0] === word[0].toUpperCase() &&
-                    !['The', 'A', 'An', 'For', 'With', 'Build', 'Create'].includes(word)
+                    !/^\d+$/.test(word) && // Skip pure numbers like "1000"
+                    !['The', 'A', 'An', 'For', 'With', 'Build', 'Create', 'He', 'I'].includes(word)
                 );
                 if (potentialName && !potentialName.includes('.')) {
                     leadData.name = potentialName;
                 }
             }
 
-            // Extract project description (anything substantial)
+            // Extract project description (anything substantial that's not pure numbers/money)
             if (!leadData.projectDescription && message.length > 10) {
-                // Skip if it's just a number (budget) or email
-                if (!message.match(/^\$?\d+/) && !message.includes('@')) {
+                // Skip if it's just a number (budget), email, or money amounts
+                const isJustNumbers = /^[\$\d,.\s–-]+$/.test(message.trim());
+                if (!isJustNumbers && !message.includes('@')) {
                     leadData.projectDescription = message.substring(0, 200);
                 }
             }
 
-            // Extract budget (look for numbers with $ or just numbers)
+            // Extract budget (look for 3+ digit numbers with optional $ or commas)
             if (!leadData.budget) {
-                const budgetMatch = message.match(/\$?[\d,]+(?:\.\d{2})?/);
+                // Match patterns like 1000, $1000, $1,000, etc - must be 3+ digits
+                const budgetMatch = message.match(/\$?[\d]{3,}(?:,\d{3})?(?:\.\d{2})?/);
                 if (budgetMatch) {
                     leadData.budget = budgetMatch[0];
                 }
