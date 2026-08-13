@@ -286,8 +286,8 @@
     </div>
 
     <script>
-        const CHATBOT_API = 'https://lightmeme.vercel.app/api/chatbot/message';
-        const LEAD_API = 'https://lightmeme.vercel.app/api/leads/capture';
+        // Secure Backend URL - API key hidden server-side
+        const BACKEND_URL = 'https://portfolio-chatbot-backend-psi.vercel.app';
 
         let conversationHistory = [];
         let leadData = { name: null, email: null, projectDescription: null, budget: null };
@@ -317,12 +317,15 @@
             if (el) el.remove();
         }
 
-        async function callChatbot(userMessage) {
+        async function callBackend(userMessage) {
             try {
-                const res = await fetch(CHATBOT_API, {
+                const res = await fetch(`${BACKEND_URL}/api/chat`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ messages: [...conversationHistory, { role: 'user', content: userMessage }] })
+                    body: JSON.stringify({
+                        message: userMessage,
+                        conversationHistory: conversationHistory
+                    })
                 });
 
                 if (!res.ok) return "I'm having trouble connecting. Try again?";
@@ -348,7 +351,7 @@
 
             extractLeadInfo(message);
             showTyping();
-            const botResponse = await callChatbot(message);
+            const botResponse = await callBackend(message);
             removeTyping();
 
             addMessage(botResponse, 'bot');
@@ -357,7 +360,7 @@
             if (conversationHistory.length > 4) conversationStage = 'name';
 
             if (leadData.name && leadData.email && leadData.projectDescription && leadData.budget) {
-                captureLeadData();
+                captureLead();
             }
         }
 
@@ -385,26 +388,25 @@
             }
         }
 
-        async function captureLeadData() {
+        async function captureLead() {
+            leadCaptured = true;
+
             try {
-                const res = await fetch(LEAD_API, {
+                await fetch(`${BACKEND_URL}/api/leads`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(leadData)
                 });
-
-                if (res.ok) {
-                    leadCaptured = true;
-                    const badge = document.createElement('div');
-                    badge.className = 'success-badge';
-                    badge.textContent = '✓ Perfect! Osuolale will be in touch within 24 hours.';
-                    document.getElementById('messagesContainer').appendChild(badge);
-                    document.getElementById('userInput').disabled = true;
-                    document.getElementById('sendBtn').disabled = true;
-                }
             } catch (error) {
-                console.error('Error:', error);
+                console.error('Error capturing lead:', error);
             }
+
+            const badge = document.createElement('div');
+            badge.className = 'success-badge';
+            badge.textContent = '✓ Perfect! Osuolale will be in touch within 24 hours.';
+            document.getElementById('messagesContainer').appendChild(badge);
+            document.getElementById('userInput').disabled = true;
+            document.getElementById('sendBtn').disabled = true;
         }
 
         window.addEventListener('load', () => {
