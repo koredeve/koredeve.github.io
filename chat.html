@@ -293,6 +293,15 @@
         let leadData = { name: null, email: null, projectDescription: null, budget: null };
         let conversationStage = 'greeting';
         let leadCaptured = false;
+        let messageCount = 0;
+
+        // Reset lead data for fresh conversation
+        function resetLeadData() {
+            leadData = { name: null, email: null, projectDescription: null, budget: null };
+            leadCaptured = false;
+            messageCount = 0;
+            console.log('🔄 Lead data reset for new conversation');
+        }
 
         function addMessage(content, sender) {
             const container = document.getElementById('messagesContainer');
@@ -344,6 +353,9 @@
 
             if (!message || leadCaptured) return;
 
+            messageCount++;
+            console.log(`📨 Message ${messageCount} from user:`, message);
+
             addMessage(message, 'user');
             input.value = '';
 
@@ -384,16 +396,29 @@
             if (isConfirmation) {
                 // Give a slight delay for data extraction to finish
                 setTimeout(() => {
-                    console.log('Checking if ready to capture lead...');
+                    console.log('🔍 Checking if ready to capture lead...');
+                    console.log('Message count:', messageCount);
                     console.log('Has name:', !!leadData.name);
                     console.log('Has email:', !!leadData.email);
                     console.log('Has project:', !!leadData.projectDescription);
                     console.log('Has budget:', !!leadData.budget);
 
+                    // Only capture after at least 3 user messages (enough time for data entry)
+                    if (messageCount < 3) {
+                        console.log('⏳ Too early to capture - need at least 3 messages, have:', messageCount);
+                        return;
+                    }
+
                     // If missing name but have email, use email prefix as name
                     if (!leadData.name && leadData.email) {
                         leadData.name = leadData.email.split('@')[0];
                         console.log('Generated name from email:', leadData.name);
+                    }
+
+                    // Validate data quality - email should match the pattern
+                    if (!leadData.email || !leadData.email.includes('@')) {
+                        console.log('❌ INVALID EMAIL - Not capturing yet');
+                        return;
                     }
 
                     // Only need email, project, and budget (name can be generated)
