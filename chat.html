@@ -349,7 +349,10 @@
 
             conversationHistory.push({ role: 'user', content: message });
 
+            // Extract from user message
             extractLeadInfo(message);
+            console.log('After user extraction:', leadData);
+
             showTyping();
             const botResponse = await callBackend(message);
             removeTyping();
@@ -359,8 +362,9 @@
 
             if (conversationHistory.length > 4) conversationStage = 'name';
 
-            // Extract data from bot response too (in case bot mentions details)
+            // Extract data from bot response too (IMPORTANT - bot mentions email)
             extractLeadInfo(botResponse);
+            console.log('After bot extraction:', leadData);
 
             // Check if bot confirmed the lead (mentioned email or will reach out)
             const isConfirmation = botResponse.includes('reach out') ||
