@@ -384,8 +384,15 @@
                     console.log('Has project:', !!leadData.projectDescription);
                     console.log('Has budget:', !!leadData.budget);
 
-                    if (leadData.name && leadData.email && leadData.projectDescription && leadData.budget) {
-                        console.log('✅ ALL DATA READY - Capturing lead:', leadData);
+                    // If missing name but have email, use email prefix as name
+                    if (!leadData.name && leadData.email) {
+                        leadData.name = leadData.email.split('@')[0];
+                        console.log('Generated name from email:', leadData.name);
+                    }
+
+                    // Only need email, project, and budget (name can be generated)
+                    if (leadData.email && leadData.projectDescription && leadData.budget) {
+                        console.log('✅ SUFFICIENT DATA - Capturing lead:', leadData);
                         captureLead();
                     } else {
                         console.log('❌ INCOMPLETE - Missing:', {
