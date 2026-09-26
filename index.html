@@ -639,16 +639,17 @@
             color: var(--text-muted);
         }
 
-        /* Floating Chatbot Widget */
+        /* Floating Chatbot Widget with Playful Random Motion */
         .chatbot-widget {
             position: fixed;
-            bottom: 28px;
-            right: 28px;
+            bottom: 30px;
+            right: 30px;
             z-index: 9999;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: left 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), top 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s ease;
         }
 
         .bot-bubble {
@@ -1130,25 +1131,30 @@
     </div>
 
     <script>
+        const widget = document.getElementById('chatbotWidget');
+        const modal = document.getElementById('chatModal');
+        let moveInterval = null;
+        let isHovered = false;
+
         function openChatModal() {
-            const modal = document.getElementById('chatModal');
             if (modal) {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                stopMoving();
             }
         }
 
         function closeChatModal() {
-            const modal = document.getElementById('chatModal');
             if (modal) {
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
+                startMoving();
             }
         }
 
         // Close on backdrop click
-        document.getElementById('chatModal')?.addEventListener('click', (e) => {
-            if (e.target === document.getElementById('chatModal')) {
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
                 closeChatModal();
             }
         });
@@ -1159,6 +1165,66 @@
                 closeChatModal();
             }
         });
+
+        // ===== PLAYFUL RANDOM MOVEMENT =====
+        function getRandomPosition() {
+            const padding = 28;
+            const widgetWidth = widget ? widget.offsetWidth || 180 : 180;
+            const widgetHeight = widget ? widget.offsetHeight || 60 : 60;
+            const maxX = Math.max(padding, window.innerWidth - widgetWidth - padding);
+            const maxY = Math.max(padding, window.innerHeight - widgetHeight - padding);
+
+            const randomX = Math.floor(Math.random() * (maxX - padding)) + padding;
+            const randomY = Math.floor(Math.random() * (maxY - padding)) + padding;
+
+            return { x: randomX, y: randomY };
+        }
+
+        function moveWidget() {
+            if (!widget || isHovered || modal?.classList.contains('active')) return;
+            const pos = getRandomPosition();
+            widget.style.bottom = 'auto';
+            widget.style.right = 'auto';
+            widget.style.left = pos.x + 'px';
+            widget.style.top = pos.y + 'px';
+        }
+
+        function startMoving() {
+            if (moveInterval) clearInterval(moveInterval);
+            moveInterval = setInterval(() => {
+                moveWidget();
+            }, 4500);
+        }
+
+        function stopMoving() {
+            if (moveInterval) {
+                clearInterval(moveInterval);
+                moveInterval = null;
+            }
+        }
+
+        if (widget) {
+            widget.addEventListener('mouseenter', () => {
+                isHovered = true;
+                stopMoving();
+            });
+
+            widget.addEventListener('mouseleave', () => {
+                isHovered = false;
+                startMoving();
+            });
+
+            // Start random jumping after 2 seconds
+            setTimeout(() => {
+                startMoving();
+            }, 2000);
+
+            window.addEventListener('resize', () => {
+                if (widget.style.left && widget.style.top) {
+                    moveWidget();
+                }
+            });
+        }
     </script>
 </body>
 </html>

@@ -366,6 +366,18 @@
             sendMessage();
         }
 
+        let step = 1;
+
+        function updatePlaceholder() {
+            const input = document.getElementById('userInput');
+            if (!input) return;
+            if (step === 1) input.placeholder = "Enter your name...";
+            else if (step === 2) input.placeholder = "Enter your email (e.g. name@example.com)...";
+            else if (step === 3) input.placeholder = "Describe your project or inquiry...";
+            else if (step === 4) input.placeholder = "Enter your estimated budget (e.g. $5,000)...";
+            else input.placeholder = "Type your message...";
+        }
+
         async function sendMessage() {
             const input = document.getElementById('userInput');
             const message = input.value.trim();
@@ -374,6 +386,10 @@
 
             addMessage(message, 'user');
             input.value = '';
+
+            // Remove quick suggestions once interaction starts
+            const suggestions = document.querySelector('.quick-suggestions');
+            if (suggestions) suggestions.remove();
 
             conversationHistory.push({ role: 'user', content: message });
             showTyping();
@@ -400,14 +416,17 @@
                 if (data && data.message) {
                     addMessage(data.message, 'bot');
                     conversationHistory.push({ role: 'assistant', content: data.message });
+                    step++;
+                    updatePlaceholder();
 
                     if (data.isComplete && data.leadData) {
                         isConversationComplete = true;
 
                         const badge = document.createElement('div');
                         badge.className = 'success-badge';
-                        badge.textContent = '✓ Fantastic! Osuolale has received your inquiry and will reach out within 24 hours.';
+                        badge.textContent = '✓ Fantastic! Osuolale has received your project details and will reach out within 24 hours.';
                         document.getElementById('messagesContainer').appendChild(badge);
+                        document.getElementById('messagesContainer').scrollTop = document.getElementById('messagesContainer').scrollHeight;
 
                         document.getElementById('userInput').disabled = true;
                         document.getElementById('sendBtn').disabled = true;
@@ -439,17 +458,13 @@
         }
 
         window.addEventListener('load', () => {
-            addMessage("Hey there! 👋 I'm Osuolale's assistant. What's your name, and how can we collaborate on your next AI or Web3 build?", 'bot');
+            updatePlaceholder();
+            addMessage("Hey there! 👋 I'm Osuolale's assistant. What's your name?", 'bot');
 
-            const container = document.getElementById('messagesContainer');
-            const quickDiv = document.createElement('div');
-            quickDiv.className = 'quick-suggestions';
-            quickDiv.innerHTML = `
-                <button class="suggestion-chip" onclick="sendQuickPrompt('Tell me about your Web3 & GenLayer projects')">⚡ Web3 &amp; GenLayer</button>
-                <button class="suggestion-chip" onclick="sendQuickPrompt('What is DeltaPerp Arbitrage Terminal?')">📈 DeltaPerp Terminal</button>
-                <button class="suggestion-chip" onclick="sendQuickPrompt('I would like to discuss a project hire')">💼 Discuss a project</button>
-            `;
-            container.appendChild(quickDiv);
+            setTimeout(() => {
+                const input = document.getElementById('userInput');
+                if (input) input.focus();
+            }, 300);
         });
     </script>
 </body>
