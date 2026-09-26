@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osuolale Quyum (koredeve) — AI &amp; Web3 Systems Engineer</title>
-    <meta name="description" content="AI & Web3 Systems Engineer building Intelligent Contracts, autonomous agent pipelines, DeFi arbitrage tools, and high-performance full-stack applications.">
+    <title>Osuolale Quyum — AI Engineer</title>
+    <meta name="description" content="AI Engineer building intelligent applications, automation pipelines, and full-stack systems with mathematical precision.">
     
     <!-- OpenGraph -->
-    <meta property="og:title" content="Osuolale Quyum — AI & Web3 Systems Engineer">
-    <meta property="og:description" content="Building GenLayer Intelligent Contracts, autonomous agent pipelines, and high-performance full-stack applications with mathematical precision.">
+    <meta property="og:title" content="Osuolale Quyum — AI Engineer">
+    <meta property="og:description" content="AI Engineer building intelligent applications, automation pipelines, and full-stack systems with mathematical precision.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://koredeve.github.io">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Osuolale Quyum — AI & Web3 Systems Engineer">
-    <meta name="twitter:description" content="Building GenLayer Intelligent Contracts, autonomous agent pipelines, and high-performance full-stack applications.">
+    <meta name="twitter:title" content="Osuolale Quyum — AI Engineer">
+    <meta name="twitter:description" content="AI Engineer building intelligent applications, automation pipelines, and full-stack systems.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,24 +29,20 @@
         }
 
         :root {
-            --bg: #050508;
-            --bg-surface: rgba(255, 255, 255, 0.03);
-            --bg-surface-hover: rgba(255, 255, 255, 0.06);
-            --bg-card: rgba(13, 15, 24, 0.7);
+            --bg: #07080d;
+            --bg-card: rgba(16, 18, 28, 0.65);
+            --bg-card-hover: rgba(24, 27, 42, 0.85);
             --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(255, 255, 255, 0.18);
+            --border-hover: rgba(99, 102, 241, 0.35);
             
             --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
             
             --accent-1: #6366f1; /* Indigo */
             --accent-2: #ec4899; /* Pink */
             --accent-3: #14b8a6; /* Teal */
-            --accent-green: #10b981;
-            
-            --glow-1: rgba(99, 102, 241, 0.14);
-            --glow-2: rgba(236, 72, 153, 0.12);
+            --accent-glow: rgba(99, 102, 241, 0.15);
         }
 
         html {
@@ -56,9 +52,9 @@
         body {
             background-color: var(--bg);
             background-image:
-                radial-gradient(circle at 10% 20%, var(--glow-1), transparent 35%),
-                radial-gradient(circle at 90% 40%, var(--glow-2), transparent 30%),
-                radial-gradient(circle at 50% 80%, rgba(20, 184, 166, 0.08), transparent 35%);
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12), transparent 40%),
+                radial-gradient(circle at 85% 35%, rgba(236, 72, 153, 0.08), transparent 35%),
+                radial-gradient(circle at 50% 85%, rgba(20, 184, 166, 0.06), transparent 40%);
             background-attachment: fixed;
             color: var(--text-primary);
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -83,51 +79,45 @@
             color: #ffffff;
         }
 
-        /* Background Grid Overlay */
+        /* Subtle Ambient Grid */
         .bg-grid {
             position: fixed;
             inset: 0;
             background-image:
                 linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 48px 48px;
-            mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
-            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
+            background-size: 56px 56px;
+            mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Glass Panel */
+        /* Card Panels with Glassmorphism */
         .glass-panel {
             background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--border);
             border-radius: 20px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .glass-panel:hover {
             border-color: var(--border-hover);
+            background: var(--bg-card-hover);
         }
 
-        /* Gradient Texts */
+        /* Gradient Typography */
         .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+            background: linear-gradient(135deg, #ffffff 10%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .text-gradient-accent {
-            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .text-gradient-teal {
-            background: linear-gradient(135deg, #22d3ee 0%, #10b981 100%);
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -149,12 +139,12 @@
             border: none;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+            box-shadow: 0 8px 28px rgba(99, 102, 241, 0.45);
             filter: brightness(1.08);
         }
 
@@ -163,12 +153,12 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 13px 28px;
+            padding: 13px 26px;
             border-radius: 12px;
             font-family: 'Outfit', sans-serif;
             font-weight: 600;
             font-size: 15px;
-            background: var(--bg-surface);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text-primary);
             border: 1px solid var(--border);
             cursor: pointer;
@@ -177,8 +167,8 @@
         }
 
         .btn-secondary:hover {
-            background: var(--bg-surface-hover);
-            border-color: var(--border-hover);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
             color: #ffffff;
         }
@@ -190,7 +180,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(5, 5, 8, 0.75);
+            background: rgba(7, 8, 13, 0.8);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
@@ -203,23 +193,9 @@
 
         .nav-brand {
             font-family: 'Outfit', sans-serif;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-brand .brand-badge {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 6px;
-            background: rgba(99, 102, 241, 0.15);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            color: var(--accent-1);
-            font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         .nav-links {
@@ -229,7 +205,7 @@
         }
 
         .nav-links a {
-            font-size: 14px;
+            font-size: 14.5px;
             color: var(--text-secondary);
             font-weight: 500;
             transition: color 0.2s ease;
@@ -245,9 +221,9 @@
             gap: 12px;
         }
 
-        /* Section Layout */
+        /* Main Section Container */
         section {
-            padding: 120px 5%;
+            padding: 130px 5%;
             max-width: 1240px;
             margin: 0 auto;
             scroll-margin-top: 80px;
@@ -259,7 +235,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 130px;
+            padding-top: 140px;
             padding-bottom: 80px;
         }
 
@@ -267,11 +243,11 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 18px;
+            padding: 7px 16px;
             border-radius: 100px;
             background: rgba(16, 185, 129, 0.08);
             border: 1px solid rgba(16, 185, 129, 0.25);
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             width: fit-content;
         }
 
@@ -280,7 +256,7 @@
             height: 8px;
             border-radius: 50%;
             background: #10b981;
-            box-shadow: 0 0 12px #10b981;
+            box-shadow: 0 0 10px #10b981;
             animation: pulseDot 2s infinite;
         }
 
@@ -297,21 +273,20 @@
         }
 
         .hero h1 {
-            font-size: clamp(42px, 6.5vw, 76px);
+            font-size: clamp(44px, 7vw, 80px);
             font-weight: 900;
-            line-height: 1.06;
+            line-height: 1.05;
             letter-spacing: -2px;
             margin-bottom: 24px;
-            max-width: 980px;
+            max-width: 1020px;
         }
 
         .hero p.lead {
             font-size: clamp(17px, 2vw, 20px);
             color: var(--text-secondary);
-            max-width: 700px;
+            max-width: 720px;
             line-height: 1.8;
             margin-bottom: 44px;
-            font-weight: 400;
         }
 
         .hero-stats {
@@ -323,15 +298,15 @@
         }
 
         .stat-card {
-            padding: 20px 24px;
-            border-radius: 16px;
-            background: var(--bg-surface);
+            padding: 22px 26px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border);
         }
 
         .stat-number {
             font-family: 'Outfit', sans-serif;
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 800;
             color: #ffffff;
             line-height: 1;
@@ -354,7 +329,7 @@
             align-items: center;
         }
 
-        /* Section Headings */
+        /* Section Headers */
         .section-header {
             margin-bottom: 56px;
         }
@@ -380,12 +355,12 @@
         .section-desc {
             font-size: 16px;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 640px;
             margin-top: 14px;
             line-height: 1.7;
         }
 
-        /* About / Philosophy Cards */
+        /* About & Philosophy Grid */
         .about-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -400,12 +375,12 @@
         }
 
         .about-icon {
-            font-size: 32px;
+            font-size: 30px;
             margin-bottom: 20px;
             width: 56px;
             height: 56px;
             border-radius: 14px;
-            background: rgba(99, 102, 241, 0.12);
+            background: rgba(99, 102, 241, 0.1);
             border: 1px solid rgba(99, 102, 241, 0.25);
             display: flex;
             align-items: center;
@@ -441,8 +416,8 @@
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
         }
 
         .project-top {
@@ -453,11 +428,11 @@
         }
 
         .project-tag {
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 100px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border);
@@ -551,10 +526,6 @@
             gap: 10px;
         }
 
-        .skill-group h3 span {
-            font-size: 20px;
-        }
-
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
@@ -579,9 +550,9 @@
             transform: translateY(-1px);
         }
 
-        /* CTA / Contact */
+        /* Contact Section */
         .contact-card {
-            padding: clamp(48px, 8vw, 80px) 6%;
+            padding: clamp(48px, 8vw, 84px) 6%;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -607,7 +578,7 @@
         .contact-card p {
             font-size: 17px;
             color: var(--text-secondary);
-            max-width: 540px;
+            max-width: 560px;
             margin: 0 auto 44px;
             line-height: 1.8;
         }
@@ -653,7 +624,7 @@
         }
 
         .bot-bubble {
-            background: rgba(13, 15, 24, 0.85);
+            background: rgba(13, 15, 24, 0.88);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border);
             color: #ffffff;
@@ -670,14 +641,14 @@
         }
 
         .bot-icon-btn {
-            width: 58px;
-            height: 58px;
+            width: 56px;
+            height: 56px;
             border-radius: 16px;
             background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
+            font-size: 24px;
             box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
@@ -791,19 +762,18 @@
     <nav>
         <div class="nav-brand">
             <span class="text-gradient-accent">K</span>oredeve
-            <span class="brand-badge">AI / Web3</span>
         </div>
         <div class="nav-links">
             <a href="#about">About</a>
-            <a href="#projects">Flagships</a>
-            <a href="#skills">Arsenal</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>
         </div>
         <div class="nav-actions">
-            <button onclick="openChatModal()" class="btn-secondary" style="padding: 8px 16px; font-size: 13px;">
+            <button onclick="openChatModal()" class="btn-secondary" style="padding: 8px 16px; font-size: 13.5px;">
                 💬 AI Assistant
             </button>
-            <a href="cv.html" class="btn-primary" style="padding: 8px 20px; font-size: 13px;">
+            <a href="cv.html" class="btn-primary" style="padding: 8px 20px; font-size: 13.5px;">
                 CV ↗
             </a>
         </div>
@@ -813,15 +783,15 @@
     <section class="hero">
         <div class="status-pill">
             <div class="status-dot"></div>
-            <span class="status-text">Available for AI &amp; Web3 Engineering Roles / Consulting</span>
+            <span class="status-text">Available for AI Engineering Roles &amp; Project Collaborations</span>
         </div>
 
         <h1>
-            Architecting <span class="text-gradient-accent">Intelligent Contracts</span> &amp; Production AI Systems.
+            AI Engineer Building <span class="text-gradient-accent">Intelligent Systems</span> &amp; Modern Applications.
         </h1>
 
         <p class="lead">
-            I'm <strong>Osuolale Quyum</strong> (koredeve) — an AI &amp; Web3 Systems Engineer with a B.Sc. in Mathematics from LAUTECH. I build GenLayer Intelligent Contracts, autonomous agent pipelines, DeFi arbitrage tools, and high-performance Web3 applications.
+            I'm <strong>Osuolale Quyum</strong> — an AI Engineer with a strong mathematical foundation (B.Sc. Mathematics, LAUTECH). I architect autonomous AI pipelines, intelligent contracts, arbitrage tools, and high-performance full-stack web applications.
         </p>
 
         <!-- Stats Grid -->
@@ -841,42 +811,42 @@
         </div>
 
         <div class="hero-buttons">
-            <a href="#projects" class="btn-primary">Explore Flagship Systems ↓</a>
-            <button onclick="openChatModal()" class="btn-secondary">Talk with AI Assistant 🤖</button>
-            <a href="https://github.com/koredeve" target="_blank" class="btn-secondary">GitHub ↗</a>
+            <a href="#projects" class="btn-primary">View Projects ↓</a>
+            <button onclick="openChatModal()" class="btn-secondary">Chat with AI Assistant 🤖</button>
+            <a href="https://github.com/koredeve" target="_blank" class="btn-secondary">GitHub Profile ↗</a>
         </div>
     </section>
 
-    <!-- About / Architecture Section -->
+    <!-- About Section -->
     <section id="about">
         <div class="section-header">
-            <span class="section-tag">Engineering Rigor</span>
-            <h2 class="section-title">Mathematical Logic meets <span class="text-gradient-teal">Autonomous Protocols</span></h2>
-            <p class="section-desc">Translating formal mathematical problem-solving into decentralized intelligent protocols, deterministic financial engines, and robust AI workflows.</p>
+            <span class="section-tag">Engineering Approach</span>
+            <h2 class="section-title">Analytical Precision meets <span class="text-gradient-accent">Autonomous Systems</span></h2>
+            <p class="section-desc">Approaching software architecture the same way I approach mathematical proofs: structured, robust, and designed for edge cases.</p>
         </div>
 
         <div class="about-grid">
             <div class="glass-panel about-card">
                 <div>
-                    <div class="about-icon">⛓️</div>
-                    <h3>GenLayer &amp; Intelligent Contracts</h3>
-                    <p>Pioneering milestone-gated DAO grant vaults and freelance settlement protocols where GenLayer AI validators independently inspect live web evidence and reach consensus before funds move.</p>
+                    <div class="about-icon">🧠</div>
+                    <h3>Intelligent Systems &amp; Agents</h3>
+                    <p>Designing autonomous agent workflows, live web evidence verification, and multi-model LLM pipelines that execute with deterministic safeguards and zero hallucination.</p>
                 </div>
             </div>
 
             <div class="glass-panel about-card">
                 <div>
                     <div class="about-icon">⚡</div>
-                    <h3>DeFi &amp; Arbitrage Systems</h3>
-                    <p>Architecting real-time perpetual DEX basis scanners, net cash-and-carry yield calculators, and algorithmic position sizing engines built with zero room for AI hallucination.</p>
+                    <h3>DeFi &amp; Arbitrage Tools</h3>
+                    <p>Engineering real-time perpetual DEX basis scanners, net cash-and-carry yield calculators, and algorithmic position sizing platforms built for precision.</p>
                 </div>
             </div>
 
             <div class="glass-panel about-card">
                 <div>
-                    <div class="about-icon">🚀</div>
-                    <h3>Full-Stack AI Products</h3>
-                    <p>Shipping production Next.js, React, and Python applications featuring multi-model vision routing (Claude, GPT-4o, DeepSeek), automated content pipelines, and interactive biomechanics skill trees.</p>
+                    <div class="about-icon">💻</div>
+                    <h3>Full-Stack Product Engineering</h3>
+                    <p>Building responsive, accessible React and Next.js applications featuring real-time workout players, PDF generators, interactive skill trees, and stateful interfaces.</p>
                 </div>
             </div>
         </div>
@@ -885,16 +855,16 @@
     <!-- Projects Section -->
     <section id="projects">
         <div class="section-header">
-            <span class="section-tag">Flagship Deployments</span>
-            <h2 class="section-title">Production <span class="text-gradient-accent">Systems &amp; DApps</span></h2>
-            <p class="section-desc">Verifiable, decentralized, and live systems running across Web3, DeFi, and AI infrastructure.</p>
+            <span class="section-tag">Featured Works</span>
+            <h2 class="section-title">Featured <span class="text-gradient-accent">Projects</span></h2>
+            <p class="section-desc">Production applications, intelligent systems, and automated pipelines.</p>
         </div>
 
         <div class="projects-grid">
             <!-- 1. ImpactVault -->
             <div class="glass-panel project-card">
                 <div class="project-top">
-                    <span class="project-tag" style="color: #6366f1;">Web3 · GenLayer AI</span>
+                    <span class="project-tag" style="color: #818cf8;">GenLayer AI Protocol</span>
                     <span style="font-size: 12px; color: var(--text-muted);">2026</span>
                 </div>
                 <div class="project-title">ImpactVault Protocol</div>
@@ -909,7 +879,7 @@
                     <span class="badge">MetaMask</span>
                 </div>
                 <div class="project-links">
-                    <a href="https://impact-vault-tau.vercel.app" target="_blank" class="link-primary">Live DApp ↗</a>
+                    <a href="https://impact-vault-tau.vercel.app" target="_blank" class="link-primary">Live App ↗</a>
                     <a href="https://github.com/koredeve/impact-vault" target="_blank" class="link-secondary">Source Code</a>
                 </div>
             </div>
@@ -917,7 +887,7 @@
             <!-- 2. WorkProof -->
             <div class="glass-panel project-card">
                 <div class="project-top">
-                    <span class="project-tag" style="color: #14b8a6;">Web3 · AI Escrow</span>
+                    <span class="project-tag" style="color: #2dd4bf;">AI Escrow Protocol</span>
                     <span style="font-size: 12px; color: var(--text-muted);">2026</span>
                 </div>
                 <div class="project-title">WorkProof Protocol</div>
@@ -939,7 +909,7 @@
             <!-- 3. DeltaPerp Terminal -->
             <div class="glass-panel project-card">
                 <div class="project-top">
-                    <span class="project-tag" style="color: #10b981;">DeFi · AI Studio</span>
+                    <span class="project-tag" style="color: #34d399;">DeFi · AI Studio</span>
                     <span style="font-size: 12px; color: var(--text-muted);">2026</span>
                 </div>
                 <div class="project-title">DeltaPerp Arbitrage Terminal</div>
@@ -960,12 +930,12 @@
             <!-- 4. FORGE Ecosystem -->
             <div class="glass-panel project-card">
                 <div class="project-top">
-                    <span class="project-tag" style="color: #ec4899;">HealthTech · Next.js</span>
+                    <span class="project-tag" style="color: #f472b6;">HealthTech · Next.js</span>
                     <span style="font-size: 12px; color: var(--text-muted);">2026</span>
                 </div>
                 <div class="project-title">FORGE Suite (Him &amp; Her)</div>
                 <div class="project-description">
-                    Calisthenics bodyweight architecture and targeted feminine biomechanics platforms. Features guided workout players, AI coach assistants, interactive skill trees, and custom routine builders.
+                    Calisthenics bodyweight leverage and targeted feminine biomechanics platforms. Features guided workout players, AI coach assistants, interactive skill trees, and custom routine builders.
                 </div>
                 <div class="project-badges">
                     <span class="badge">Next.js</span>
@@ -982,12 +952,12 @@
             <!-- 5. YouTube Automation -->
             <div class="glass-panel project-card">
                 <div class="project-top">
-                    <span class="project-tag" style="color: #f59e0b;">Automation · Production</span>
+                    <span class="project-tag" style="color: #fbbf24;">Automation · Production</span>
                     <span style="font-size: 12px; color: var(--text-muted);">2025</span>
                 </div>
                 <div class="project-title">YouTube Content Pipeline</div>
                 <div class="project-description">
-                    Fully autonomous multi-channel pipeline handling real-time content scheduling, media processing workflows, and automated deployment. Production engine managing recurring tasks reliably.
+                    Fully autonomous multi-channel pipeline handling real-time content scheduling, media processing workflows, and automated deployment. Production engine managing recurring automated tasks.
                 </div>
                 <div class="project-badges">
                     <span class="badge">Python</span>
@@ -1003,7 +973,7 @@
             <!-- 6. SignalAI -->
             <div class="glass-panel project-card">
                 <div class="project-top">
-                    <span class="project-tag" style="color: #8b5cf6;">AI · Vision Trading</span>
+                    <span class="project-tag" style="color: #a78bfa;">AI · Vision Analysis</span>
                     <span style="font-size: 12px; color: var(--text-muted);">2025</span>
                 </div>
                 <div class="project-title">SignalAI Chart Engine</div>
@@ -1023,60 +993,65 @@
         </div>
     </section>
 
-    <!-- Technical Arsenal -->
+    <!-- Skills Section -->
     <section id="skills">
         <div class="section-header">
-            <span class="section-tag">Capabilities</span>
-            <h2 class="section-title">Technical <span class="text-gradient-teal">Arsenal</span></h2>
-            <p class="section-desc">Tools, protocols, and technologies leveraged across production systems.</p>
+            <span class="section-tag">Technical Proficiency</span>
+            <h2 class="section-title">Technical <span class="text-gradient-accent">Arsenal</span></h2>
+            <p class="section-desc">Comprehensive tools, languages, and frameworks used across production environments.</p>
         </div>
 
         <div class="skills-grid">
             <div class="glass-panel skill-group">
-                <h3><span>🧠</span> AI &amp; Intelligent Systems</h3>
+                <h3>Languages &amp; Core</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">GenLayer Intelligent Contracts</span>
-                    <span class="skill-tag">OpenRouter</span>
-                    <span class="skill-tag">Claude 3.5 / GPT-4o / DeepSeek</span>
-                    <span class="skill-tag">AI Studio</span>
-                    <span class="skill-tag">Vision LLMs</span>
-                    <span class="skill-tag">Agentic Workflows</span>
-                </div>
-            </div>
-
-            <div class="glass-panel skill-group">
-                <h3><span>⛓️</span> Web3 &amp; Blockchain</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">GenVM (Python)</span>
-                    <span class="skill-tag">EIP-6963 Multi-Wallet</span>
-                    <span class="skill-tag">MetaMask / Rabby</span>
-                    <span class="skill-tag">Escrow &amp; Dispute State Machines</span>
-                    <span class="skill-tag">On-Chain Consensus</span>
-                    <span class="skill-tag">DeFi &amp; Yield Math</span>
-                </div>
-            </div>
-
-            <div class="glass-panel skill-group">
-                <h3><span>💻</span> Frontend &amp; Full-Stack</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Next.js (App &amp; Pages Router)</span>
-                    <span class="skill-tag">React 18/19</span>
-                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Python (3.10+)</span>
                     <span class="skill-tag">JavaScript (ES6+)</span>
-                    <span class="skill-tag">TailwindCSS</span>
-                    <span class="skill-tag">Canvas API</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">HTML5 / Semantic UI</span>
+                    <span class="skill-tag">CSS3 / Modern CSS</span>
+                    <span class="skill-tag">SQL</span>
                 </div>
             </div>
 
             <div class="glass-panel skill-group">
-                <h3><span>⚙️</span> Backend &amp; Architecture</h3>
+                <h3>AI &amp; Intelligent Systems</h3>
                 <div class="skill-tags">
-                    <span class="skill-tag">Python 3.12+</span>
-                    <span class="skill-tag">REST &amp; WebSocket APIs</span>
+                    <span class="skill-tag">LLM Integration</span>
+                    <span class="skill-tag">OpenRouter API</span>
+                    <span class="skill-tag">Claude 3.5 / Sonnet</span>
+                    <span class="skill-tag">GPT-4o / DeepSeek</span>
+                    <span class="skill-tag">Google AI Studio</span>
+                    <span class="skill-tag">Vision LLMs</span>
+                    <span class="skill-tag">Prompt Engineering</span>
+                    <span class="skill-tag">Autonomous Pipelines</span>
+                </div>
+            </div>
+
+            <div class="glass-panel skill-group">
+                <h3>Frontend &amp; Full-Stack</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">React.js (18/19)</span>
+                    <span class="skill-tag">Next.js (App &amp; Pages)</span>
+                    <span class="skill-tag">Tailwind CSS</span>
+                    <span class="skill-tag">Responsive UI/UX</span>
+                    <span class="skill-tag">Canvas API</span>
+                    <span class="skill-tag">WebSockets</span>
+                    <span class="skill-tag">State Management</span>
+                </div>
+            </div>
+
+            <div class="glass-panel skill-group">
+                <h3>Backend, DevOps &amp; Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">REST APIs</span>
                     <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Git / GitHub</span>
+                    <span class="skill-tag">Vercel Deployment</span>
                     <span class="skill-tag">Firebase</span>
-                    <span class="skill-tag">Vercel</span>
                     <span class="skill-tag">pytest &amp; Vitest</span>
+                    <span class="skill-tag">Automation Workflows</span>
                 </div>
             </div>
         </div>
@@ -1085,15 +1060,15 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="glass-panel contact-card">
-            <h2>Ready to Engineer <span class="text-gradient-accent">What's Next?</span></h2>
-            <p>Whether you're building next-generation Intelligent Contracts on GenLayer, deploying autonomous AI agents, or seeking an engineer with mathematical precision — let's connect.</p>
+            <h2>Let's Build Something <span class="text-gradient-accent">Exceptional.</span></h2>
+            <p>Whether you're developing intelligent AI systems, autonomous pipelines, or looking for an engineer with strong analytical precision — I'm open to discussing roles and projects.</p>
             
             <div class="contact-buttons">
                 <a href="mailto:kelightsub@gmail.com" class="btn-primary">
-                    ✉️ Drop an Email
+                    ✉️ Email Me Directly
                 </a>
                 <button onclick="openChatModal()" class="btn-secondary">
-                    🤖 Talk with AI Assistant
+                    🤖 Chat with AI Assistant
                 </button>
                 <a href="https://linkedin.com/in/osuolale-quyum-068209133" target="_blank" class="btn-secondary">
                     LinkedIn ↗
@@ -1107,14 +1082,14 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 Osuolale Quyum (koredeve) — AI &amp; Web3 Systems in Production</p>
+        <p>© 2026 Osuolale Quyum (koredeve) — AI Engineer</p>
         <p><a href="cv.html" style="color: var(--accent-1); text-decoration: underline;">View Full CV / Resume</a></p>
     </footer>
 
-    <!-- Fixed Floating Bot Widget (No Random Jumping) -->
+    <!-- Floating Chatbot Widget with Playful Random Motion -->
     <div id="chatbotWidget" class="chatbot-widget" onclick="openChatModal()">
         <div class="bot-bubble">
-            <span>✨ Ask my AI Assistant</span>
+            <span>✨ Chat with AI</span>
         </div>
         <div class="bot-icon-btn">
             <div class="bot-ping"></div>
@@ -1159,7 +1134,7 @@
             }
         });
 
-        // Close on Escape
+        // Close on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeChatModal();
@@ -1169,7 +1144,7 @@
         // ===== PLAYFUL RANDOM MOVEMENT =====
         function getRandomPosition() {
             const padding = 28;
-            const widgetWidth = widget ? widget.offsetWidth || 180 : 180;
+            const widgetWidth = widget ? widget.offsetWidth || 160 : 160;
             const widgetHeight = widget ? widget.offsetHeight || 60 : 60;
             const maxX = Math.max(padding, window.innerWidth - widgetWidth - padding);
             const maxY = Math.max(padding, window.innerHeight - widgetHeight - padding);
@@ -1214,7 +1189,7 @@
                 startMoving();
             });
 
-            // Start random jumping after 2 seconds
+            // Start random jumping after initial 2 seconds
             setTimeout(() => {
                 startMoving();
             }, 2000);
