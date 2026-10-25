@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Assistant — Osuolale Quyum (koredeve)</title>
+    <title>AI Portfolio Assistant — Osuolale Quyum (koredeve)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,6 +19,8 @@
             --bg-base: #090a0e;
             --bg-surface: #0f1118;
             --bg-card: #131622;
+            --bg-bubble-bot: #10131f;
+            --bg-bubble-user: #181d2e;
             --border: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(204, 255, 0, 0.4);
             --text-primary: #f5f5f0;
@@ -50,11 +52,10 @@
             display: flex;
             flex-direction: column;
             background: var(--bg-base);
-            border-radius: 0;
             position: relative;
         }
 
-        /* Subtle Technical Grid Background */
+        /* Technical Grid Pattern */
         .chatbot-wrapper::before {
             content: '';
             position: absolute;
@@ -67,16 +68,17 @@
             z-index: 0;
         }
 
+        /* Header */
         .chatbot-header {
-            padding: 16px 20px;
+            padding: 14px 20px;
             border-bottom: 1px solid var(--border);
-            background: rgba(15, 17, 24, 0.85);
+            background: rgba(15, 17, 24, 0.92);
             backdrop-filter: blur(12px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .header-info {
@@ -104,8 +106,7 @@
             font-family: var(--font-display);
             font-size: 14px;
             font-weight: 700;
-            letter-spacing: -0.01em;
-            color: var(--text-primary);
+            letter-spacing: 0.5px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -113,18 +114,19 @@
 
         .header-tag {
             font-family: var(--font-mono);
-            font-size: 10px;
-            padding: 2px 6px;
-            background: var(--accent-dim);
+            font-size: 9.5px;
             color: var(--accent);
+            background: var(--accent-dim);
+            padding: 2px 6px;
             border-radius: 3px;
-            border: 1px solid rgba(204, 255, 0, 0.25);
+            border: 1px solid rgba(204, 255, 0, 0.2);
+            font-weight: normal;
         }
 
         .header-text p {
             font-family: var(--font-mono);
             font-size: 11px;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -135,37 +137,57 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 8px var(--accent);
-            animation: pulse 2s infinite ease-in-out;
+            background: #10b981;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reset-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.15s;
+        }
+
+        .reset-btn:hover {
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
         }
 
         .close-btn {
             background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+            border: none;
+            color: var(--text-muted);
+            font-size: 18px;
             width: 28px;
             height: 28px;
-            border-radius: 4px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            transition: all 0.2s;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: color 0.15s, background 0.15s;
         }
 
         .close-btn:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-            background: var(--accent-dim);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
         }
 
+        /* Messages */
         .messages-container {
             flex: 1;
             overflow-y: auto;
@@ -173,27 +195,21 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
-            scroll-behavior: smooth;
             position: relative;
             z-index: 1;
+            scroll-behavior: smooth;
         }
 
         .message {
             display: flex;
-            gap: 10px;
-            animation: slideIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            max-width: 88%;
+            flex-direction: column;
+            max-width: 82%;
+            animation: fadeIn 0.2s ease-out;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(6px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .message.bot {
@@ -202,65 +218,126 @@
 
         .message.user {
             align-self: flex-end;
-            flex-direction: row-reverse;
         }
 
         .message-content {
             padding: 12px 16px;
             border-radius: 8px;
             font-size: 13.5px;
-            line-height: 1.55;
+            line-height: 1.6;
             word-break: break-word;
         }
 
         .message.bot .message-content {
-            background: var(--bg-surface);
+            background: var(--bg-bubble-bot);
             border: 1px solid var(--border);
             color: var(--text-primary);
             border-top-left-radius: 2px;
         }
 
         .message.user .message-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border-hover);
-            border-left: 2px solid var(--accent);
-            color: var(--text-primary);
+            background: var(--bg-bubble-user);
+            border: 1px solid rgba(204, 255, 0, 0.25);
+            color: #ffffff;
             border-top-right-radius: 2px;
+        }
+
+        .message-content p {
+            margin-bottom: 8px;
+        }
+
+        .message-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .message-content ul, .message-content ol {
+            margin: 6px 0 6px 18px;
+        }
+
+        .message-content li {
+            margin-bottom: 4px;
+        }
+
+        .message-content a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .message-content strong {
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .message-time {
             font-family: var(--font-mono);
-            font-size: 9px;
+            font-size: 10px;
             color: var(--text-muted);
             margin-top: 4px;
-            display: block;
+            align-self: flex-start;
         }
 
         .message.user .message-time {
-            text-align: right;
+            align-self: flex-end;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 12px 16px;
+            background: var(--bg-bubble-bot);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            border-top-left-radius: 2px;
+            width: fit-content;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: pulse 1.2s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.15); }
         }
 
         /* Quick Suggestions */
         .quick-suggestions {
+            padding: 8px 16px 12px;
             display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            padding: 0 20px 12px 20px;
+            gap: 8px;
+            overflow-x: auto;
             position: relative;
             z-index: 1;
+            scrollbar-width: none;
+        }
+
+        .quick-suggestions::-webkit-scrollbar {
+            display: none;
         }
 
         .suggestion-chip {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             color: var(--text-secondary);
             padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 11.5px;
+            border-radius: 100px;
             font-family: var(--font-mono);
-            cursor: pointer;
-            transition: all 0.2s;
+            font-size: 11.5px;
             white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.15s;
+            flex-shrink: 0;
         }
 
         .suggestion-chip:hover {
@@ -269,88 +346,68 @@
             background: var(--accent-dim);
         }
 
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 10px 14px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            width: fit-content;
-        }
-
-        .typing-dot {
-            width: 5px;
-            height: 5px;
-            background: var(--text-muted);
-            border-radius: 50%;
-            animation: bounce 1.2s infinite ease-in-out;
-        }
-
-        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes bounce {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-4px); opacity: 1; background: var(--accent); }
-        }
-
+        /* Input area */
         .input-area {
-            padding: 14px 20px;
+            padding: 12px 16px 16px;
             border-top: 1px solid var(--border);
             background: rgba(15, 17, 24, 0.95);
             display: flex;
             gap: 10px;
-            align-items: center;
+            align-items: flex-end;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .input-wrapper {
             flex: 1;
-            position: relative;
-        }
-
-        .chat-input {
-            width: 100%;
-            padding: 12px 14px;
-            background: var(--bg-void);
+            background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 13px;
-            font-family: var(--font-body);
-            outline: none;
-            transition: border-color 0.2s;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            transition: border-color 0.15s;
         }
 
-        .chat-input:focus {
+        .input-wrapper:focus-within {
             border-color: var(--accent);
-            box-shadow: 0 0 0 1px var(--accent);
         }
 
-        .chat-input::placeholder {
+        .chat-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 13.5px;
+            line-height: 1.45;
+            resize: none;
+            max-height: 100px;
+            min-height: 22px;
+        }
+
+        .chat-textarea::placeholder {
             color: var(--text-muted);
-            font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 12.5px;
         }
 
         .send-btn {
             background: var(--accent);
-            color: #060709;
+            color: #000000;
             border: none;
             padding: 10px 16px;
             border-radius: 6px;
-            cursor: pointer;
             font-family: var(--font-mono);
             font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
+            font-weight: 600;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 6px;
             transition: transform 0.15s, opacity 0.15s;
+            height: 38px;
+            flex-shrink: 0;
         }
 
         .send-btn:hover {
@@ -359,56 +416,64 @@
         }
 
         .send-btn:disabled {
-            opacity: 0.4;
+            opacity: 0.35;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
         }
 
-        .success-badge {
-            margin: 12px auto;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #10b981;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-size: 12.5px;
-            font-family: var(--font-mono);
-            text-align: center;
-            max-width: 90%;
+        @media (max-width: 600px) {
+            .message {
+                max-width: 90%;
+            }
+            .chatbot-header {
+                padding: 12px 14px;
+            }
+            .input-area {
+                padding: 10px 12px 12px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="chatbot-wrapper">
+        <!-- Header -->
         <div class="chatbot-header">
             <div class="header-info">
                 <div class="bot-avatar">&gt;_</div>
                 <div class="header-text">
-                    <h1>KOREDEVE TELEMETRY <span class="header-tag">AI ASSISTANT</span></h1>
-                    <p><span class="status-dot"></span> CONNECTED TO AGENT PIPELINE</p>
+                    <h1>KOREDEVE <span class="header-tag">AI ASSISTANT</span></h1>
+                    <p><span class="status-dot"></span> VERIFIED KNOWLEDGE BASE</p>
                 </div>
             </div>
-            <button class="close-btn" onclick="closeChat()" title="Close chat">✕</button>
+            <div class="header-actions">
+                <button class="reset-btn" onclick="resetConversation()" title="Reset conversation">↺ Reset</button>
+                <button class="close-btn" onclick="closeChat()" title="Close chat" aria-label="Close">✕</button>
+            </div>
         </div>
 
+        <!-- Messages Container -->
         <div class="messages-container" id="messagesContainer"></div>
 
+        <!-- 4 Verified Quick Action Chips -->
         <div class="quick-suggestions" id="quickSuggestions">
-            <button class="suggestion-chip" onclick="quickSend('I need an intelligent AI / Web3 contract')">⚡ Intelligent Contracts</button>
-            <button class="suggestion-chip" onclick="quickSend('Looking for DeFi arbitrage or automation pipelines')">📊 DeFi &amp; Automation</button>
-            <button class="suggestion-chip" onclick="quickSend('I would like to hire or collaborate with Osuolale')">🤝 Hire / Collaborate</button>
+            <button class="suggestion-chip" onclick="handleChipClick('Explore Projects')">🚀 Explore Projects</button>
+            <button class="suggestion-chip" onclick="handleChipClick('Technical Skills')">⚡ Technical Skills</button>
+            <button class="suggestion-chip" onclick="handleChipClick('Education & Experience')">🎓 Education &amp; Experience</button>
+            <button class="suggestion-chip" onclick="handleChipClick('Hire / Collaborate')">🤝 Hire / Collaborate</button>
         </div>
 
+        <!-- Input Area -->
         <div class="input-area">
             <div class="input-wrapper">
-                <input 
-                    type="text" 
+                <textarea 
                     id="userInput" 
-                    class="chat-input" 
-                    placeholder="Enter your name..." 
-                    autocomplete="off"
+                    class="chat-textarea" 
+                    placeholder="Ask about projects, skills, background, or collaboration..." 
+                    rows="1"
                     onkeydown="handleKeyDown(event)"
-                >
+                    oninput="autoResize(this)"
+                ></textarea>
             </div>
             <button class="send-btn" id="sendBtn" onclick="sendMessage()">
                 <span>SEND</span>
@@ -418,10 +483,169 @@
     </div>
 
     <script>
-        const BACKEND_URL = 'https://portfolio-chatbot-backend-psi.vercel.app';
-        let conversationHistory = [];
-        let isConversationComplete = false;
-        let step = 1;
+        // =========================================================================
+        // VERIFIED GROUND TRUTH KNOWLEDGE BASE
+        // =========================================================================
+        const KNOWLEDGE_BASE = {
+            developer: {
+                title: "Osuolale Quyum (koredeve)",
+                summary: "<strong>Osuolale Quyum</strong> (known online as <strong>koredeve</strong>) is an AI systems and software engineer based in Oyo State, Nigeria. He bridges pure mathematical principles with practical software engineering, building AI-powered applications, decentralized intelligent contracts on GenLayer, arbitrage terminals, and autonomous automation pipelines."
+            },
+            education: {
+                degree: "B.Sc. Pure & Applied Mathematics, Second Class Upper",
+                institution: "Ladoke Akintola University of Technology (LAUTECH), Ogbomoso, Nigeria",
+                period: "2021 – 2025",
+                details: "Osuolale completed his Bachelor of Science in Pure & Applied Mathematics at LAUTECH (2021–2025), graduating with Second Class Upper honors. His mathematical training in formal logic, optimization, and abstract algebra directly informs his software engineering approach—specifically in designing deterministic financial calculations and state machines that cannot deadlock."
+            },
+            experience: {
+                summary: "Osuolale's experience combines professional training with extensive independent system building:",
+                roles: [
+                    "<strong>Independent Software & AI Development (2024 – Present):</strong> Engineered full-stack AI applications, decentralized escrow and DAO grant protocols on GenLayer using Python GenVM contracts, multi-model vision pipelines, and Python media automation systems.",
+                    "<strong>SQI College of ICT — Industrial Training Intern (2024):</strong> Developed responsive web interfaces using semantic HTML5, CSS3, and JavaScript, practicing modern frontend principles and cross-browser debugging."
+                ]
+            },
+            skills: {
+                summary: "Osuolale's core technical competencies include:",
+                categories: [
+                    "<strong>Languages:</strong> Python 3.11+, JavaScript, TypeScript, SQL, HTML5, CSS3",
+                    "<strong>AI & Smart Contracts:</strong> GenLayer Intelligent Contracts (Python GenVM), LLM Integration (OpenRouter, Claude API, GPT-4o, DeepSeek), Google AI Studio, Multi-Model Vision Analysis",
+                    "<strong>Frontend Engineering:</strong> Next.js 14, React 18, Vite, Tailwind CSS, Canvas API, Web Audio API",
+                    "<strong>Automation & Infrastructure:</strong> FFmpeg, YouTube API v3, Cron background pipelines, Docker, Git, GitHub Actions, Vercel, Firebase"
+                ]
+            },
+            projects: {
+                all: [
+                    "<strong>1. WorkProof Protocol:</strong> Trustless freelance escrow on GenLayer with AI validator consensus scoring deliverables (<a href='https://workproof-gamma.vercel.app' target='_blank' rel='noopener noreferrer'>Live App</a> | <a href='https://github.com/koredeve/workproof' target='_blank' rel='noopener noreferrer'>GitHub</a>).",
+                    "<strong>2. ImpactVault Protocol:</strong> Milestone-gated DAO grant and crowdfunding protocol with pro-rata contributor refunds (<a href='https://impact-vault-tau.vercel.app' target='_blank' rel='noopener noreferrer'>Live DApp</a> | <a href='https://github.com/koredeve/impact-vault' target='_blank' rel='noopener noreferrer'>GitHub</a>).",
+                    "<strong>3. DeltaPerp Arbitrage Terminal:</strong> Deterministic perpetual DEX vs spot cash-and-carry yield calculator (<a href='https://deltaperp.ai.studio' target='_blank' rel='noopener noreferrer'>Terminal</a>).",
+                    "<strong>4. SignalAI Chart Engine:</strong> Multi-model financial chart vision comparison across Claude 3.5 Sonnet, GPT-4o, and DeepSeek (<a href='https://signalai-kappa.vercel.app' target='_blank' rel='noopener noreferrer'>Live Demo</a> | <a href='https://github.com/koredeve/SignalAi' target='_blank' rel='noopener noreferrer'>GitHub</a>).",
+                    "<strong>5. FORGE Suite (Him & Her):</strong> Progressive calisthenics leverage architecture and biomechanics platforms (<a href='https://forgehim.vercel.app' target='_blank' rel='noopener noreferrer'>FORGE Him</a> | <a href='https://forgeher.vercel.app' target='_blank' rel='noopener noreferrer'>FORGE Her</a> | <a href='https://github.com/koredeve/forge-fitness' target='_blank' rel='noopener noreferrer'>GitHub</a>).",
+                    "<strong>6. YouTube Automation Engine:</strong> Autonomous Python publishing pipeline with FFmpeg video synthesis and YouTube API v3 scheduling.",
+                    "<strong>7. MathSolverBot & Car LandedIQ:</strong> Step-by-step mathematical problem solver (<a href='https://mathsolverbot.vercel.app' target='_blank' rel='noopener noreferrer'>MathSolver</a> | <a href='https://github.com/koredeve/math-solver' target='_blank' rel='noopener noreferrer'>GitHub</a>) and Nigerian customs duty landed cost bidding calculator (<a href='https://carlandediq.vercel.app' target='_blank' rel='noopener noreferrer'>Car LandedIQ</a>)."
+                ],
+                workproof: "<strong>WorkProof Protocol</strong> is a trustless freelance settlement and work verification protocol built on GenLayer Intelligent Contracts.<br><br>• <strong>Problem:</strong> Traditional freelance platforms rely on centralized arbiters or manual disputes that freeze funds.<br>• <strong>Solution:</strong> Clients lock escrow against objective milestone criteria; freelancers submit live deliverable URLs; AI validators retrieve web evidence and score criteria before escrow settles.<br>• <strong>Tech Stack:</strong> Python GenVM contracts, React + Vite, EIP-6963 multi-wallet connector, and a 44-test verification suite.<br>• <strong>Live App:</strong> <a href='https://workproof-gamma.vercel.app' target='_blank' rel='noopener noreferrer'>workproof-gamma.vercel.app ↗</a><br>• <strong>Repository:</strong> <a href='https://github.com/koredeve/workproof' target='_blank' rel='noopener noreferrer'>github.com/koredeve/workproof ↗</a>",
+                impactvault: "<strong>ImpactVault Protocol</strong> is a milestone-gated DAO grant and crowdfunding protocol built on GenLayer Intelligent Contracts.<br><br>• <strong>Problem:</strong> Public grant programs and crowdfunds often pay 100% upfront with zero accountability if deliverables fail.<br>• <strong>Solution:</strong> Capital is deposited into milestone-gated vaults and released strictly in tranches upon verified criteria, with pro-rata contributor refund protection.<br>• <strong>Tech Stack:</strong> Python GenVM, React 18, EIP-3085 network switching, and 13 unit tests.<br>• <strong>Live DApp:</strong> <a href='https://impact-vault-tau.vercel.app' target='_blank' rel='noopener noreferrer'>impact-vault-tau.vercel.app ↗</a><br>• <strong>Repository:</strong> <a href='https://github.com/koredeve/impact-vault' target='_blank' rel='noopener noreferrer'>github.com/koredeve/impact-vault ↗</a>",
+                deltaperp: "<strong>DeltaPerp Arbitrage Terminal</strong> is a financial tool that computes net cash-and-carry yields between perpetual futures and spot markets.<br><br>• <strong>Problem:</strong> Funding rate spreads fluctuate rapidly across DEXes like Hyperliquid and CEXes like Binance. Calculating annualized APY while subtracting borrowing costs and execution slippage is error-prone when done manually.<br>• <strong>Solution:</strong> Implements exact deterministic mathematical formulas to scan funding rates and produce delta-neutral execution playbooks without AI hallucination.<br>• <strong>Live Terminal:</strong> <a href='https://deltaperp.ai.studio' target='_blank' rel='noopener noreferrer'>deltaperp.ai.studio ↗</a>",
+                signalai: "<strong>SignalAI Chart Analysis Engine</strong> is a multi-model vision analysis platform comparing financial candlestick chart setups across multiple frontier models.<br><br>• <strong>Problem:</strong> Relying on a single vision model for chart analysis often produces blind spots or conflicting support/resistance levels.<br>• <strong>Solution:</strong> Queries Claude 3.5 Sonnet, GPT-4o, and DeepSeek via OpenRouter, extracting structured pattern interpretations and synthesizing comparative consensus.<br>• <strong>Tech Stack:</strong> Next.js 14, OpenRouter API, Canvas API rendering.<br>• <strong>Live Demo:</strong> <a href='https://signalai-kappa.vercel.app' target='_blank' rel='noopener noreferrer'>signalai-kappa.vercel.app ↗</a><br>• <strong>Repository:</strong> <a href='https://github.com/koredeve/SignalAi' target='_blank' rel='noopener noreferrer'>github.com/koredeve/SignalAi ↗</a>",
+                forge: "<strong>FORGE Suite (Him & Her)</strong> are calisthenics leverage progression and targeted feminine biomechanics platforms.<br><br>• <strong>Features:</strong> Guided interactive workout player, exercise progression skill trees, custom routine builders, and workout tracking.<br>• <strong>Tech Stack:</strong> Next.js, React, Firebase.<br>• <strong>FORGE Him:</strong> <a href='https://forgehim.vercel.app' target='_blank' rel='noopener noreferrer'>forgehim.vercel.app ↗</a><br>• <strong>FORGE Her:</strong> <a href='https://forgeher.vercel.app' target='_blank' rel='noopener noreferrer'>forgeher.vercel.app ↗</a><br>• <strong>Repository:</strong> <a href='https://github.com/koredeve/forge-fitness' target='_blank' rel='noopener noreferrer'>github.com/koredeve/forge-fitness ↗</a>",
+                youtube: "<strong>YouTube Automation Engine</strong> is an autonomous multi-channel publishing system built in Python.<br><br>• <strong>Capabilities:</strong> Automates video metadata scheduling, batch rendering via FFmpeg and MoviePy, and scheduled deployment to YouTube channels using the YouTube Data API v3.<br>• <strong>Status:</strong> Internal automation engine / CLI.",
+                mathsolver: "<strong>MathSolverBot & Car LandedIQ:</strong><br><br>• <strong>MathSolverBot:</strong> Conversational mathematical assistant providing verified step-by-step reasoning via OpenRouter API with Marked.js and MathJax LaTeX rendering (<a href='https://mathsolverbot.vercel.app' target='_blank' rel='noopener noreferrer'>Live App</a> | <a href='https://github.com/koredeve/math-solver' target='_blank' rel='noopener noreferrer'>GitHub</a>).<br>• <strong>Car LandedIQ:</strong> Nigerian customs duty landed cost bidding calculator applying real tariff schedules to automotive import auctions (<a href='https://carlandediq.vercel.app' target='_blank' rel='noopener noreferrer'>Live App</a>)."
+            },
+            contact: {
+                summary: "You can reach Osuolale directly through any of the following channels:",
+                channels: [
+                    "<strong>Email:</strong> <a href='mailto:kelightsub@gmail.com'>kelightsub@gmail.com</a>",
+                    "<strong>GitHub:</strong> <a href='https://github.com/koredeve' target='_blank' rel='noopener noreferrer'>github.com/koredeve</a>",
+                    "<strong>LinkedIn:</strong> <a href='https://linkedin.com/in/osuolale-quyum-068209133' target='_blank' rel='noopener noreferrer'>linkedin.com/in/osuolale-quyum-068209133</a>",
+                    "<strong>Portfolio:</strong> <a href='https://koredeve.github.io' target='_blank' rel='noopener noreferrer'>koredeve.github.io</a>",
+                    "<strong>Curriculum Vitae:</strong> <a href='cv.html' target='_blank' rel='noopener noreferrer'>View CV</a> or download <a href='Osuolale_Quyum_CV.pdf' download>Osuolale_Quyum_CV.pdf</a>"
+                ]
+            },
+            approach: {
+                summary: "Osuolale's engineering methodology bridges <strong>formal mathematical deduction with practical software systems</strong>:<br><br>• <strong>Invariants over Heuristics:</strong> Having studied pure mathematics at LAUTECH, he treats software invariants with mathematical rigor—designing state machines that cannot deadlock and protocols that verify data before taking irreversible actions.<br>• <strong>Deterministic Calculations:</strong> Tools like DeltaPerp and Car LandedIQ avoid unreliable LLM hallucinations for math, using fixed-precision, verified formulas.<br>• <strong>Intelligent Contracts:</strong> On GenLayer, he pairs off-chain AI consensus with immutable on-chain criteria to settle escrow trustlessly."
+            }
+        };
+
+        // =========================================================================
+        // QUERY PROCESSOR & MATCHER
+        // =========================================================================
+        function processQuery(query) {
+            const q = query.toLowerCase().trim();
+
+            if (!q) {
+                return "Please enter a question or select one of the suggested topics below.";
+            }
+
+            // 1. Specific Projects
+            if (q.includes("workproof")) {
+                return KNOWLEDGE_BASE.projects.workproof;
+            }
+            if (q.includes("impactvault") || q.includes("impact vault")) {
+                return KNOWLEDGE_BASE.projects.impactvault;
+            }
+            if (q.includes("deltaperp") || q.includes("delta perp") || q.includes("arbitrage") || q.includes("funding rate")) {
+                return KNOWLEDGE_BASE.projects.deltaperp;
+            }
+            if (q.includes("signalai") || q.includes("signal ai") || (q.includes("chart") && (q.includes("engine") || q.includes("vision")))) {
+                return KNOWLEDGE_BASE.projects.signalai;
+            }
+            if (q.includes("forge")) {
+                return KNOWLEDGE_BASE.projects.forge;
+            }
+            if (q.includes("youtube") || q.includes("automation engine")) {
+                return KNOWLEDGE_BASE.projects.youtube;
+            }
+            if (q.includes("mathsolver") || q.includes("math solver") || q.includes("landediq") || q.includes("landed iq") || q.includes("customs")) {
+                return KNOWLEDGE_BASE.projects.mathsolver;
+            }
+
+            // 2. Broad Projects
+            if (q.includes("project") || q.includes("built") || q.includes("portfolio") || q.includes("what has he made") || q.includes("applications") || q.includes("explore projects")) {
+                return `<p>Here is a breakdown of verified projects built by Osuolale:</p><ul>` + 
+                    KNOWLEDGE_BASE.projects.all.map(item => `<li>${item}</li>`).join('') + 
+                    `</ul><p style='margin-top:8px;'>You can ask me for deep dives into any specific project (e.g. <em>"Tell me about WorkProof"</em> or <em>"Explain DeltaPerp"</em>).</p>`;
+            }
+
+            // 3. Technical Skills & Stack
+            if (q.includes("skill") || q.includes("stack") || q.includes("technolog") || q.includes("language") || q.includes("python") || q.includes("framework") || q.includes("tool")) {
+                return `<p>${KNOWLEDGE_BASE.skills.summary}</p><ul>` + 
+                    KNOWLEDGE_BASE.skills.categories.map(c => `<li>${c}</li>`).join('') + 
+                    `</ul>`;
+            }
+
+            // 4. Education & Academic Background
+            if (q.includes("education") || q.includes("degree") || q.includes("university") || q.includes("lautech") || q.includes("academic") || q.includes("college") || q.includes("study") || q.includes("studied")) {
+                return `<p><strong>Education:</strong> ${KNOWLEDGE_BASE.education.degree}</p>` +
+                    `<p><strong>Institution:</strong> ${KNOWLEDGE_BASE.education.institution} (${KNOWLEDGE_BASE.education.period})</p>` +
+                    `<p>${KNOWLEDGE_BASE.education.details}</p>`;
+            }
+
+            // 5. Experience & Internships
+            if (q.includes("experience") || q.includes("background") || q.includes("intern") || q.includes("sqi") || q.includes("work history") || q.includes("career")) {
+                return `<p>${KNOWLEDGE_BASE.experience.summary}</p><ul>` + 
+                    KNOWLEDGE_BASE.experience.roles.map(r => `<li>${r}</li>`).join('') + 
+                    `</ul>`;
+            }
+
+            // 6. Contact, Hiring & Collaboration
+            if (q.includes("contact") || q.includes("hire") || q.includes("email") || q.includes("collaborat") || q.includes("reach") || q.includes("github") || q.includes("linkedin") || q.includes("cv") || q.includes("resume")) {
+                return `<p>${KNOWLEDGE_BASE.contact.summary}</p><ul>` + 
+                    KNOWLEDGE_BASE.contact.channels.map(ch => `<li>${ch}</li>`).join('') + 
+                    `</ul>`;
+            }
+
+            // 7. Developer Identity / Bio
+            if (q.includes("who is") || q.includes("about") || q.includes("developer") || q.includes("quyum") || q.includes("koredeve") || q.includes("introduce")) {
+                return `<p>${KNOWLEDGE_BASE.developer.summary}</p>` +
+                    `<p style='margin-top:8px;'>He graduated with a <strong>B.Sc. in Pure &amp; Applied Mathematics from LAUTECH</strong> (2025, Second Class Upper) and specializes in building reliable AI-driven products with deterministic mathematics.</p>`;
+            }
+
+            // 8. Engineering Approach / Philosophy / Uniqueness
+            if (q.includes("approach") || q.includes("unique") || q.includes("philosoph") || q.includes("method") || q.includes("rigor") || q.includes("invariant") || q.includes("why hire")) {
+                return `<p>${KNOWLEDGE_BASE.approach.summary}</p>`;
+            }
+
+            // 9. Polite Greetings
+            if (q === "hi" || q === "hello" || q === "hey" || q.startsWith("hello") || q.startsWith("hi ")) {
+                return "Hello! I am Osuolale Quyum's portfolio assistant. What would you like to know about his projects, technical capabilities, mathematical background, or how to collaborate with him?";
+            }
+
+            // 10. Fallback / Out of Scope Handler
+            return `<p>I am specialized in Osuolale Quyum's engineering portfolio, background, and projects.</p>` +
+                `<p>I can help you explore:</p>` +
+                `<ul>` +
+                `<li><strong>Projects:</strong> WorkProof, ImpactVault, DeltaPerp, SignalAI, FORGE, MathSolver</li>` +
+                `<li><strong>Skills:</strong> Python, GenLayer Intelligent Contracts, Next.js, LLM Integration</li>` +
+                `<li><strong>Background:</strong> LAUTECH Pure Mathematics degree &amp; engineering experience</li>` +
+                `<li><strong>Collaboration:</strong> Direct contact channels &amp; CV</li>` +
+                `</ul>` +
+                `<p>For inquiries outside this scope, feel free to contact him directly at <a href='mailto:kelightsub@gmail.com'>kelightsub@gmail.com</a>.</p>`;
+        }
+
+        // =========================================================================
+        // UI INTERACTIONS & CHAT LOGIC
+        // =========================================================================
+        let isProcessing = false;
 
         function closeChat() {
             if (window.parent && window.parent !== window) {
@@ -436,21 +660,21 @@
             return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         }
 
-        function addMessage(text, sender = 'bot') {
+        function addMessage(htmlContent, sender = 'bot') {
             const container = document.getElementById('messagesContainer');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${sender}`;
 
             const contentDiv = document.createElement('div');
             contentDiv.className = 'message-content';
-            contentDiv.innerHTML = text;
+            contentDiv.innerHTML = htmlContent;
 
             const timeSpan = document.createElement('span');
             timeSpan.className = 'message-time';
             timeSpan.textContent = formatTime();
-            contentDiv.appendChild(timeSpan);
 
             messageDiv.appendChild(contentDiv);
+            messageDiv.appendChild(timeSpan);
             container.appendChild(messageDiv);
             container.scrollTop = container.scrollHeight;
         }
@@ -476,115 +700,89 @@
             if (typing) typing.remove();
         }
 
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 100) + 'px';
+        }
+
         function handleKeyDown(event) {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault();
                 sendMessage();
             }
         }
 
-        function quickSend(text) {
+        function handleChipClick(chipName) {
+            let promptText = chipName;
+            if (chipName === 'Explore Projects') promptText = 'What projects has Osuolale built?';
+            else if (chipName === 'Technical Skills') promptText = 'What are his technical skills and stack?';
+            else if (chipName === 'Education & Experience') promptText = 'Tell me about his education and background';
+            else if (chipName === 'Hire / Collaborate') promptText = 'How do I contact or collaborate with him?';
+
+            sendCustomMessage(promptText);
+        }
+
+        function sendCustomMessage(text) {
+            if (isProcessing) return;
             const input = document.getElementById('userInput');
             input.value = text;
             sendMessage();
         }
 
-        function updatePlaceholder() {
+        function sendMessage() {
             const input = document.getElementById('userInput');
-            if (!input) return;
-            if (step === 1) input.placeholder = "Enter your name...";
-            else if (step === 2) input.placeholder = "Enter your email (e.g. name@example.com)...";
-            else if (step === 3) input.placeholder = "Describe your project or inquiry...";
-            else if (step === 4) input.placeholder = "Enter your estimated budget (e.g. $5,000)...";
-            else input.placeholder = "Type your transmission...";
-        }
+            const sendBtn = document.getElementById('sendBtn');
+            const rawText = input.value;
+            const trimmedText = rawText.trim();
 
-        async function sendMessage() {
-            const input = document.getElementById('userInput');
-            const message = input.value.trim();
+            if (!trimmedText || isProcessing) return;
 
-            if (!message || isConversationComplete) return;
-
-            addMessage(message, 'user');
+            // Render User Message
+            addMessage(escapeHtml(trimmedText), 'user');
             input.value = '';
+            input.style.height = 'auto';
 
-            const suggestions = document.getElementById('quickSuggestions');
-            if (suggestions) suggestions.style.display = 'none';
-
-            conversationHistory.push({ role: 'user', content: message });
+            // Set Processing State
+            isProcessing = true;
+            input.disabled = true;
+            sendBtn.disabled = true;
             showTyping();
 
-            try {
-                const res = await fetch(`${BACKEND_URL}/api/chat`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: message,
-                        conversationHistory: conversationHistory
-                    })
-                });
-
-                if (!res.ok) {
-                    removeTyping();
-                    addMessage("Connection timeout. You can connect directly with Osuolale at <a href='mailto:kelightsub@gmail.com' style='color:var(--accent);text-decoration:underline;'>kelightsub@gmail.com</a>.", 'bot');
-                    return;
-                }
-
-                const data = await res.json();
+            // Simulate realistic processing delay for smooth conversational rhythm
+            setTimeout(() => {
                 removeTyping();
+                const responseHtml = processQuery(trimmedText);
+                addMessage(responseHtml, 'bot');
 
-                if (data && data.message) {
-                    addMessage(data.message, 'bot');
-                    conversationHistory.push({ role: 'assistant', content: data.message });
-                    step++;
-                    updatePlaceholder();
-
-                    if (data.isComplete && data.leadData) {
-                        isConversationComplete = true;
-
-                        const badge = document.createElement('div');
-                        badge.className = 'success-badge';
-                        badge.textContent = '✓ TRANSMISSION LOGGED: Osuolale has received your project briefing and will follow up shortly.';
-                        document.getElementById('messagesContainer').appendChild(badge);
-                        document.getElementById('messagesContainer').scrollTop = document.getElementById('messagesContainer').scrollHeight;
-
-                        document.getElementById('userInput').disabled = true;
-                        document.getElementById('sendBtn').disabled = true;
-
-                        try {
-                            await fetch(`${BACKEND_URL}/api/leads`, {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({
-                                    name: data.leadData.name || 'Anonymous',
-                                    email: data.leadData.email || '',
-                                    projectDescription: data.leadData.project || message,
-                                    budget: data.leadData.budget || 'Not specified'
-                                })
-                            });
-                        } catch (err) {
-                            console.error('Lead submission note:', err);
-                        }
-                    }
-                } else {
-                    addMessage("Transmission received. You can also reach Osuolale directly at kelightsub@gmail.com.", 'bot');
-                }
-
-            } catch (error) {
-                removeTyping();
-                console.error('Chat error:', error);
-                addMessage("Telemetry offline. Please send your inquiry directly to <a href='mailto:kelightsub@gmail.com' style='color:var(--accent);text-decoration:underline;'>kelightsub@gmail.com</a>.", 'bot');
-            }
+                isProcessing = false;
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.focus();
+            }, 350);
         }
 
-        window.addEventListener('load', () => {
-            updatePlaceholder();
-            addMessage("Transmission open. 👋 I'm Osuolale's autonomous portfolio assistant. What's your name?", 'bot');
+        function resetConversation() {
+            const container = document.getElementById('messagesContainer');
+            container.innerHTML = '';
+            isProcessing = false;
+            
+            const input = document.getElementById('userInput');
+            input.disabled = false;
+            document.getElementById('sendBtn').disabled = false;
 
-            setTimeout(() => {
-                const input = document.getElementById('userInput');
-                if (input) input.focus();
-            }, 300);
+            addMessage("Hi! I'm the portfolio assistant for <strong>Osuolale Quyum</strong> (koredeve). Ask me about his software projects, technical skills, mathematical background, or how to get in touch.", 'bot');
+            input.focus();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            resetConversation();
         });
     </script>
 </body>

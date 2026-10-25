@@ -988,133 +988,6 @@
         .terminal-row .val.pos { color: var(--green); }
         .terminal-row .val.highlight { color: var(--accent); }
 
-        /* FEATURED EXPERIMENT: PROOFOS SHOWCASE CARD */
-        .case-study-experiment {
-            background: linear-gradient(180deg, rgba(15, 17, 24, 0.95), rgba(9, 10, 14, 0.95));
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--accent);
-            border-radius: 8px;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-        }
-
-        .experiment-badge {
-            font-family: var(--font-mono);
-            font-size: 10.5px;
-            color: var(--amber);
-            background: rgba(255, 183, 0, 0.08);
-            border: 1px solid rgba(255, 183, 0, 0.3);
-            padding: 3px 8px;
-            border-radius: 3px;
-        }
-
-        .simulated-watermark {
-            font-family: var(--font-mono);
-            font-size: 9.5px;
-            color: var(--text-muted);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        /* Interactive Prototype Preview inside Project Card */
-        .proto-preview-box {
-            background: #06070a;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .proto-bar {
-            background: #0d0f17;
-            padding: 10px 14px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 11px;
-        }
-
-        .proto-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .proto-step-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .proto-step-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 11.5px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .proto-step-item.active {
-            border-color: var(--accent);
-            background: rgba(204, 255, 0, 0.05);
-        }
-
-        .proto-step-item.alert-stop {
-            border-color: var(--red);
-            background: rgba(255, 77, 90, 0.08);
-        }
-
-        .proto-telemetry-box {
-            background: #0a0c14;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 14px;
-            font-family: var(--font-mono);
-            font-size: 11.5px;
-            line-height: 1.6;
-        }
-
-        .proto-controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .proto-toggle-btn {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            font-size: 10.5px;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .proto-toggle-btn.active {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-dim);
-        }
-
-        .proto-toggle-btn.active-adversarial {
-            border-color: var(--red);
-            color: var(--red);
-            background: rgba(255, 77, 90, 0.1);
-        }
-
         /* Asymmetric Editorial Pair */
         .projects-asymmetric-pair {
             display: grid;
@@ -1558,7 +1431,6 @@
         @media (max-width: 1080px) {
             .hero-grid { grid-template-columns: 1fr; }
             .case-study-hero { grid-template-columns: 1fr; }
-            .case-study-experiment { grid-template-columns: 1fr; }
             .case-preview-display { border-left: none; border-top: 1px solid var(--border); }
             .topology-wrapper { grid-template-columns: 1fr; }
             .topology-graph-area { border-right: none; border-bottom: 1px solid var(--border); }
@@ -1610,7 +1482,6 @@
             <nav class="nav-menu">
                 <a href="#work">WORK</a>
                 <a href="#topology">SYSTEMS</a>
-                <a href="#proofos-card">EXPERIMENTS</a>
                 <a href="#about">ABOUT</a>
                 <a href="#contact">CONTACT</a>
             </nav>
@@ -1619,7 +1490,7 @@
                 <button onclick="openChatModal()" class="btn-ghost" style="padding: 7px 14px; font-size: 11.5px; font-family: var(--font-mono);">
                     💬 ASSISTANT
                 </button>
-                <a href="cv.html" target="_blank" class="btn-lime" style="padding: 7px 16px; font-size: 11.5px;">
+                <a href="cv.html" target="_blank" rel="noopener noreferrer" class="btn-lime" style="padding: 7px 16px; font-size: 11.5px;">
                     VIEW CV ↗
                 </a>
             </div>
@@ -1636,10 +1507,9 @@
         <div class="drawer-inner">
             <a href="#work" onclick="toggleMobileMenu()">WORK</a>
             <a href="#topology" onclick="toggleMobileMenu()">SYSTEMS TOPOLOGY</a>
-            <a href="#proofos-card" onclick="toggleMobileMenu()">EXPERIMENTS (PROOFOS)</a>
             <a href="#about" onclick="toggleMobileMenu()">ABOUT</a>
             <a href="#contact" onclick="toggleMobileMenu()">CONTACT</a>
-            <a href="cv.html" target="_blank" onclick="toggleMobileMenu()" style="color: var(--accent);">VIEW CV ↗</a>
+            <a href="cv.html" target="_blank" rel="noopener noreferrer" onclick="toggleMobileMenu()" style="color: var(--accent);">VIEW CV ↗</a>
             <button onclick="toggleMobileMenu(); openChatModal();" class="btn-ghost" style="margin-top: 12px; width: 100%; text-align: center; justify-content: center; font-family: var(--font-mono); font-size: 12px;">
                 💬 AI ASSISTANT
             </button>
@@ -1684,10 +1554,10 @@
                         <a href="#work" class="btn-lime">
                             EXPLORE PROJECTS ↓
                         </a>
-                        <a href="cv.html" target="_blank" class="btn-ghost" style="border-color: rgba(204, 255, 0, 0.4); color: var(--accent);">
+                        <a href="cv.html" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="border-color: rgba(204, 255, 0, 0.4); color: var(--accent);">
                             VIEW CV ↗
                         </a>
-                        <a href="https://github.com/koredeve" target="_blank" class="btn-ghost" style="font-family: var(--font-mono); font-size: 12px;">
+                        <a href="https://github.com/koredeve" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-family: var(--font-mono); font-size: 12px;">
                             GITHUB ↗
                         </a>
                     </div>
@@ -1865,7 +1735,7 @@
                         </div>
                     </div>
 
-                    <a id="inspProjectLink" href="https://github.com/koredeve/workproof" target="_blank" class="inspector-project-link">
+                    <a id="inspProjectLink" href="https://github.com/koredeve/workproof" target="_blank" rel="noopener noreferrer" class="inspector-project-link">
                         <div class="link-detail">
                             <h5 id="inspLinkTitle">Inspect WorkProof Protocol</h5>
                             <p id="inspLinkSub">github.com/koredeve/workproof ↗</p>
@@ -1935,7 +1805,7 @@
                         </div>
 
                         <div class="case-actions">
-                            <a href="https://deltaperp.ai.studio" target="_blank" class="btn-lime">
+                            <a href="https://deltaperp.ai.studio" target="_blank" rel="noopener noreferrer" class="btn-lime">
                                 LAUNCH TERMINAL ↗
                             </a>
                         </div>
@@ -1981,103 +1851,7 @@
                     </div>
                 </article>
 
-                <!-- 2. STANDOUT FEATURE 2: PROOFOS (FEATURED R&D EXPERIMENT) -->
-                <article class="case-study-experiment" id="proofos-card">
-                    <div class="case-content">
-                        <div>
-                            <div class="case-header-meta">
-                                <span class="experiment-badge">RESEARCH PROTOTYPE · R&amp;D EXPERIMENT</span>
-                                <span class="simulated-watermark">SIMULATED EXECUTION DEMO</span>
-                            </div>
-
-                            <h3 class="case-title">PROOFOS — AI Execution &amp; Verification Lab</h3>
-                            
-                            <p class="case-statement">
-                                An exploratory verification prototype designed to help developers inspect autonomous AI agent decisions, trace claims back to source evidence, and test agent reliability against simulated failure modes before actions execute.
-                            </p>
-
-                            <div class="case-breakdown-grid">
-                                <div class="breakdown-block">
-                                    <h4>The Problem Addressed</h4>
-                                    <p>When autonomous AI agents execute multi-step workflows, they frequently make unsupported assertions, cite hallucinated sources, or drift from initial constraints without leaving a verifiable audit trail.</p>
-                                </div>
-                                <div class="breakdown-block">
-                                    <h4>What I Built</h4>
-                                    <p>An interactive prototype interface featuring an execution trace timeline, evidence citation parser, and invariant assertion rules that demonstrate how root-domain isolation catches invalid sources.</p>
-                                </div>
-                                <div class="breakdown-block">
-                                    <h4>What Works Today</h4>
-                                    <p>Interactive trace inspection, simulated step-by-step playback, and rule-based failure mode analysis using structured demo runs.</p>
-                                </div>
-                                <div class="breakdown-block">
-                                    <h4>What Remains Experimental</h4>
-                                    <p>Production runtime sandboxing, live multi-agent API interception, and decentralized validator consensus on live open web evidence.</p>
-                                </div>
-                            </div>
-
-                            <div class="tech-pill-list">
-                                <span class="tech-pill">Interactive Prototype</span>
-                                <span class="tech-pill">Trace Inspection Logic</span>
-                                <span class="tech-pill">Evidence Parsing</span>
-                                <span class="tech-pill">Invariant Rules</span>
-                                <span class="tech-pill">Simulated Demo Data</span>
-                            </div>
-                        </div>
-
-                        <div class="case-actions">
-                            <a href="https://github.com/koredeve" target="_blank" class="btn-ghost" style="border-color: rgba(204, 255, 0, 0.3);">
-                                VIEW GITHUB PROFILE ↗
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Interactive Prototype Preview Card -->
-                    <div class="case-preview-display">
-                        <div class="proto-preview-box" style="width: 100%;">
-                            <div class="proto-bar">
-                                <span class="mono" style="color: var(--accent);">PROOFOS // TRACE_INSPECTOR</span>
-                                <span class="simulated-watermark" style="color: var(--amber);">[DEMO MODE: SIMULATED DATA]</span>
-                            </div>
-
-                            <div class="proto-body">
-                                <div class="proto-controls">
-                                    <span class="mono" style="font-size: 11px; color: var(--text-muted);">SCENARIO:</span>
-                                    <button class="proto-toggle-btn active" id="btnProtoNormal" onclick="setProtoMode('normal')">Standard Run</button>
-                                    <button class="proto-toggle-btn" id="btnProtoAdversarial" onclick="setProtoMode('adversarial')">Adversarial Injection (Demo)</button>
-                                </div>
-
-                                <div class="proto-step-list">
-                                    <div class="proto-step-item active" id="protoStep1" onclick="selectProtoStep(1)">
-                                        <span>[01.PARSE] Extract Contract Criteria</span>
-                                        <span style="color: var(--green);">PASSED ✓</span>
-                                    </div>
-                                    <div class="proto-step-item active" id="protoStep2" onclick="selectProtoStep(2)">
-                                        <span>[02.FETCH] Ingest Deliverable Evidence</span>
-                                        <span style="color: var(--green);">PASSED ✓</span>
-                                    </div>
-                                    <div class="proto-step-item active" id="protoStep3" onclick="selectProtoStep(3)">
-                                        <span>[03.INVARIANT] Check Domain &amp; Criteria</span>
-                                        <span id="step3Status" style="color: var(--green);">PASSED ✓</span>
-                                    </div>
-                                    <div class="proto-step-item" id="protoStep4" onclick="selectProtoStep(4)">
-                                        <span>[04.VERDICT] Confirm Output &amp; Release</span>
-                                        <span id="step4Status" style="color: var(--text-muted);">AUDIT READY</span>
-                                    </div>
-                                </div>
-
-                                <div class="proto-telemetry-box" id="protoEvidenceBox">
-                                    <div style="color: var(--text-muted); margin-bottom: 4px;">// SIMULATED EVIDENCE RECORD</div>
-                                    <div>Source: <span style="color: var(--accent);">https://github.com/koredeve/workproof/pull/4</span></div>
-                                    <div>Criteria Status: <span style="color: var(--green);">CRITERIA_VERIFIED</span></div>
-                                    <div>Root Domain Check: <span style="color: var(--green);">github.com (WHITELISTED)</span></div>
-                                    <div>Simulated Proof Hash: <span style="color: var(--text-muted);">sha256:9b2d8f...3bd6c1</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- 3 & 4: ASYMMETRIC PAIR (WorkProof & ImpactVault) -->
+                <!-- 2 & 3: ASYMMETRIC PAIR (WorkProof & ImpactVault) -->
                 <div class="projects-asymmetric-pair">
                     <!-- WorkProof -->
                     <article class="project-card-editorial">
@@ -2117,10 +1891,10 @@
                         </div>
 
                         <div class="case-actions">
-                            <a href="https://workproof-gamma.vercel.app" target="_blank" class="btn-lime" style="padding: 10px 18px; font-size: 13px;">
+                            <a href="https://workproof-gamma.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-lime" style="padding: 10px 18px; font-size: 13px;">
                                 LIVE APP ↗
                             </a>
-                            <a href="https://github.com/koredeve/workproof" target="_blank" class="btn-ghost" style="padding: 10px 18px; font-size: 13px; font-family: var(--font-mono);">
+                            <a href="https://github.com/koredeve/workproof" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 10px 18px; font-size: 13px; font-family: var(--font-mono);">
                                 GITHUB REPO ↗
                             </a>
                         </div>
@@ -2164,10 +1938,10 @@
                         </div>
 
                         <div class="case-actions">
-                            <a href="https://impact-vault-tau.vercel.app" target="_blank" class="btn-lime" style="padding: 10px 18px; font-size: 13px;">
+                            <a href="https://impact-vault-tau.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-lime" style="padding: 10px 18px; font-size: 13px;">
                                 LIVE DAPP ↗
                             </a>
-                            <a href="https://github.com/koredeve/impact-vault" target="_blank" class="btn-ghost" style="padding: 10px 18px; font-size: 13px; font-family: var(--font-mono);">
+                            <a href="https://github.com/koredeve/impact-vault" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 10px 18px; font-size: 13px; font-family: var(--font-mono);">
                                 GITHUB REPO ↗
                             </a>
                         </div>
@@ -2218,8 +1992,11 @@
                         </div>
 
                         <div class="case-actions">
-                            <a href="https://signalai-kappa.vercel.app" target="_blank" class="btn-lime">
+                            <a href="https://signalai-kappa.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-lime">
                                 LAUNCH LIVE DEMO ↗
+                            </a>
+                            <a href="https://github.com/koredeve/SignalAi" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="font-family: var(--font-mono);">
+                                GITHUB REPO ↗
                             </a>
                         </div>
                     </div>
@@ -2260,7 +2037,7 @@
                     </div>
                 </article>
 
-                <!-- 6, 7, 8: TERTIARY PRODUCTION SYSTEMS (FORGE, YOUTUBE, MATHSOLVER) -->
+                <!-- 4, 5, 6: TERTIARY SYSTEMS (FORGE, YOUTUBE AUTOMATION, MATHSOLVER & LANDEDIQ) -->
                 <div class="projects-tertiary-grid">
                     <!-- FORGE Ecosystem -->
                     <div class="mini-card">
@@ -2275,16 +2052,17 @@
                                 <span class="tech-pill">Client State</span>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://forgehim.vercel.app" target="_blank" class="btn-ghost" style="padding: 7px 12px; font-size: 11px;">FORGE HIM ↗</a>
-                            <a href="https://forgeher.vercel.app" target="_blank" class="btn-ghost" style="padding: 7px 12px; font-size: 11px;">FORGE HER ↗</a>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <a href="https://forgehim.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 7px 11px; font-size: 11px;">FORGE HIM ↗</a>
+                            <a href="https://forgeher.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 7px 11px; font-size: 11px;">FORGE HER ↗</a>
+                            <a href="https://github.com/koredeve/forge-fitness" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 7px 11px; font-size: 11px; font-family: var(--font-mono);">REPO ↗</a>
                         </div>
                     </div>
 
                     <!-- YouTube Content Automation Pipeline -->
                     <div class="mini-card">
                         <div>
-                            <span class="tag-bracket" style="font-size: 10px; margin-bottom: 12px; display: inline-block;">AUTOMATION · PRODUCTION PIPELINE</span>
+                            <span class="tag-bracket" style="font-size: 10px; margin-bottom: 12px; display: inline-block;">AUTOMATION · MEDIA PIPELINE</span>
                             <h3>YouTube Automation Engine</h3>
                             <p>Autonomous multi-channel publishing system handling content scheduling, batch media rendering, and scheduled deployment in Python using FFmpeg and YouTube API v3.</p>
                             <div class="tech-pill-list" style="margin-bottom: 20px;">
@@ -2294,7 +2072,7 @@
                                 <span class="tech-pill">Cron Pipelines</span>
                             </div>
                         </div>
-                        <a href="https://github.com/koredeve" target="_blank" class="btn-ghost" style="padding: 7px 14px; font-size: 11px; align-self: flex-start;">GITHUB PROFILE ↗</a>
+                        <span class="mono" style="font-size: 11px; color: var(--text-muted); border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; align-self: flex-start;">INTERNAL AUTOMATION CLI</span>
                     </div>
 
                     <!-- MathSolverBot & Car LandedIQ -->
@@ -2310,9 +2088,10 @@
                                 <span class="tech-pill">Next.js</span>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://mathsolverbot.vercel.app" target="_blank" class="btn-ghost" style="padding: 7px 12px; font-size: 11px;">MATH BOT ↗</a>
-                            <a href="https://carlandediq.vercel.app" target="_blank" class="btn-ghost" style="padding: 7px 12px; font-size: 11px;">LANDED IQ ↗</a>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <a href="https://mathsolverbot.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 7px 11px; font-size: 11px;">MATH BOT ↗</a>
+                            <a href="https://github.com/koredeve/math-solver" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 7px 11px; font-size: 11px; font-family: var(--font-mono);">REPO ↗</a>
+                            <a href="https://carlandediq.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="padding: 7px 11px; font-size: 11px;">LANDED IQ ↗</a>
                         </div>
                     </div>
                 </div>
@@ -2394,7 +2173,7 @@
                 <div class="section-num">[04] TECHNICAL ARSENAL</div>
                 <h2 class="section-title">Engineered Capabilities.</h2>
                 <p class="section-subtitle">
-                    A clean, verified breakdown of technologies and frameworks used across production codebases.
+                    A clean breakdown of technologies and tools used across deployed applications, protocols, and developer prototypes.
                 </p>
             </div>
 
@@ -2551,7 +2330,7 @@
                     </div>
 
                     <!-- GitHub Card -->
-                    <a href="https://github.com/koredeve" target="_blank" class="contact-card-btn">
+                    <a href="https://github.com/koredeve" target="_blank" rel="noopener noreferrer" class="contact-card-btn">
                         <div class="card-meta">
                             <h4>GitHub Profile</h4>
                             <p>github.com/koredeve ↗</p>
@@ -2560,7 +2339,7 @@
                     </a>
 
                     <!-- LinkedIn Card -->
-                    <a href="https://linkedin.com/in/osuolale-quyum-068209133" target="_blank" class="contact-card-btn">
+                    <a href="https://linkedin.com/in/osuolale-quyum-068209133" target="_blank" rel="noopener noreferrer" class="contact-card-btn">
                         <div class="card-meta">
                             <h4>LinkedIn Network</h4>
                             <p>linkedin.com/in/osuolale-quyum ↗</p>
@@ -2569,7 +2348,7 @@
                     </a>
 
                     <!-- Interactive HTML CV -->
-                    <a href="cv.html" target="_blank" class="contact-card-btn">
+                    <a href="cv.html" target="_blank" rel="noopener noreferrer" class="contact-card-btn">
                         <div class="card-meta">
                             <h4>Interactive CV / Resume</h4>
                             <p>View In-Browser HTML CV ↗</p>
@@ -2589,8 +2368,8 @@
             </div>
             <div style="display: flex; gap: 20px;">
                 <a href="#hero">BACK TO TOP ↑</a>
-                <a href="cv.html" target="_blank">VIEW CV</a>
-                <a href="https://github.com/koredeve" target="_blank">GITHUB</a>
+                <a href="cv.html" target="_blank" rel="noopener noreferrer">VIEW CV</a>
+                <a href="https://github.com/koredeve" target="_blank" rel="noopener noreferrer">GITHUB</a>
             </div>
         </div>
     </footer>
@@ -2795,8 +2574,8 @@
             },
             {
                 badge: "[LAYER 05 // REACTIVE_INTERFACES]",
-                title: "DeltaPerp Terminal, SignalAI & ProofOS Studio",
-                desc: "High-density interfaces designed for clear decision-making: the DeltaPerp basis calculator, SignalAI multi-model chart analysis, and the PROOFOS verification prototype.",
+                title: "DeltaPerp Terminal & SignalAI Chart Engine",
+                desc: "High-density interfaces designed for clear decision-making: the DeltaPerp perpetual basis calculator and SignalAI multi-model chart pattern analysis.",
                 runtime: "Next.js / TypeScript / Canvas & SVG",
                 standard: "Low Layout Shift & Clean Data Density",
                 corroboration: "Direct Manipulation & Clear State Feedback",
@@ -2847,67 +2626,7 @@
         }
 
         // =========================================================================
-        // 3. PROOFOS PROTOTYPE PREVIEW CONTROLS (SIMULATED DATA DEMO)
-        // =========================================================================
-        let protoMode = 'normal';
-        let protoActiveStep = 3;
-
-        function setProtoMode(mode) {
-            protoMode = mode;
-            const btnNorm = document.getElementById('btnProtoNormal');
-            const btnAdv = document.getElementById('btnProtoAdversarial');
-            const step3 = document.getElementById('protoStep3');
-            const step4 = document.getElementById('protoStep4');
-            const step3Status = document.getElementById('step3Status');
-            const step4Status = document.getElementById('step4Status');
-            const box = document.getElementById('protoEvidenceBox');
-
-            if (mode === 'adversarial') {
-                btnAdv.classList.add('active-adversarial');
-                btnNorm.classList.remove('active');
-                step3.classList.add('alert-stop');
-                step3Status.textContent = 'HALTED: UNAPPROVED DOMAIN ⚠';
-                step3Status.style.color = 'var(--red)';
-                step4Status.textContent = 'BLOCKED FROM EXECUTION';
-                step4Status.style.color = 'var(--text-muted)';
-                box.innerHTML = `
-                    <div style="color: var(--red); margin-bottom: 4px;">// ADVERSARIAL DRIFT DETECTED [SIMULATED DATA]</div>
-                    <div>Source: <span style="color: var(--red);">https://attacker-mirror.xyz/fake_pr</span></div>
-                    <div>Root Domain Check: <span style="color: var(--red); font-weight: 600;">FAIL — UNAPPROVED DOMAIN</span></div>
-                    <div>Action: <span style="color: var(--red);">EXECUTION HALTED · INVARIANT PRESERVED</span></div>
-                    <div style="color: var(--text-muted); margin-top: 6px;">Explanation: Root domain isolation prevented agent from accepting unverified domain.</div>
-                `;
-            } else {
-                btnNorm.classList.add('active');
-                btnAdv.classList.remove('active-adversarial');
-                step3.classList.remove('alert-stop');
-                step3Status.textContent = 'PASSED ✓';
-                step3Status.style.color = 'var(--green)';
-                step4Status.textContent = 'AUDIT READY';
-                step4Status.style.color = 'var(--text-muted)';
-                box.innerHTML = `
-                    <div style="color: var(--text-muted); margin-bottom: 4px;">// SIMULATED EVIDENCE RECORD</div>
-                    <div>Source: <span style="color: var(--accent);">https://github.com/koredeve/workproof/pull/4</span></div>
-                    <div>Criteria Status: <span style="color: var(--green);">CRITERIA_VERIFIED</span></div>
-                    <div>Root Domain Check: <span style="color: var(--green);">github.com (WHITELISTED)</span></div>
-                    <div>Simulated Proof Hash: <span style="color: var(--text-muted);">sha256:9b2d8f...3bd6c1</span></div>
-                `;
-            }
-        }
-
-        function selectProtoStep(s) {
-            protoActiveStep = s;
-            for (let i = 1; i <= 4; i++) {
-                const el = document.getElementById(`protoStep${i}`);
-                if (el) {
-                    if (i <= s) el.classList.add('active');
-                    else el.classList.remove('active');
-                }
-            }
-        }
-
-        // =========================================================================
-        // 4. CONTACT & UTILITY ACTIONS
+        // 3. CONTACT & UTILITY ACTIONS
         // =========================================================================
         function copyEmail() {
             navigator.clipboard.writeText('kelightsub@gmail.com').then(() => {
@@ -2927,7 +2646,7 @@
         }
 
         // =========================================================================
-        // 5. CHATBOT MODAL INTEGRATION
+        // 4. CHATBOT MODAL INTEGRATION
         // =========================================================================
         function openChatModal() {
             const modal = document.getElementById('chatModal');

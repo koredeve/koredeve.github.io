@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osuolale Quyum - AI Engineer</title>
+    <title>Osuolale Quyum — Curriculum Vitae</title>
     <style>
         * {
             margin: 0;
@@ -12,206 +12,338 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f5;
-            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.55;
+            color: #24292e;
+            background: #f6f8fa;
+            padding: 24px 16px;
         }
 
         .container {
-            max-width: 850px;
+            max-width: 860px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e1e4e8;
         }
 
+        /* Top Action Bar */
+        .cv-actions-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e1e4e8;
+            flex-wrap: wrap;
+        }
+
+        .cv-back-link {
+            color: #0366d6;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cv-back-link:hover {
+            text-decoration: underline;
+        }
+
+        .cv-btn-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .cv-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f6f8fa;
+            color: #24292e;
+            border: 1px solid #d1d5da;
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+
+        .cv-btn:hover {
+            background: #eef2f5;
+            border-color: #b9bec5;
+        }
+
+        .cv-btn-primary {
+            background: #0366d6;
+            color: #ffffff;
+            border-color: #0366d6;
+        }
+
+        .cv-btn-primary:hover {
+            background: #0255b5;
+            border-color: #0255b5;
+            color: #ffffff;
+        }
+
+        /* Header */
         .header {
-            border-bottom: 2px solid #007bff;
+            border-bottom: 2px solid #0366d6;
             padding-bottom: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
 
         .name {
-            font-size: 28px;
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 5px;
+            font-size: 30px;
+            font-weight: 700;
+            color: #0a0c10;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
         }
 
         .title {
-            font-size: 18px;
-            color: #007bff;
+            font-size: 17px;
+            color: #0366d6;
             margin-bottom: 10px;
             font-weight: 600;
         }
 
         .contact {
             font-size: 13px;
-            color: #666;
-            line-height: 1.5;
+            color: #586069;
+            line-height: 1.6;
         }
 
         .contact-link {
-            color: #007bff;
+            color: #0366d6;
             text-decoration: none;
         }
 
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Sections */
         .section {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
 
         .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #000;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #0a0c10;
+            border-bottom: 1px solid #e1e4e8;
+            padding-bottom: 6px;
             margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
         }
 
         .item {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .item-title {
             font-weight: 600;
-            color: #000;
+            color: #0a0c10;
             font-size: 14px;
         }
 
         .item-date {
-            font-size: 13px;
-            color: #666;
+            font-size: 12.5px;
+            color: #6a737d;
             font-style: italic;
-        }
-
-        .item-subtitle {
-            font-size: 13px;
-            color: #666;
-            margin-bottom: 5px;
         }
 
         .item-description {
             font-size: 13px;
-            color: #333;
-            margin-left: 0;
+            color: #24292e;
         }
 
         .item-description ul {
             list-style: none;
-            margin-left: 0;
             padding-left: 0;
+            margin-top: 4px;
         }
 
         .item-description li {
-            margin-bottom: 6px;
-            padding-left: 15px;
+            margin-bottom: 5px;
+            padding-left: 16px;
             position: relative;
         }
 
-        .item-description li:before {
+        .item-description li::before {
             content: "•";
             position: absolute;
-            left: 0;
-            color: #007bff;
+            left: 2px;
+            color: #0366d6;
+            font-weight: bold;
         }
 
         .skills {
             font-size: 13px;
-            color: #333;
-            line-height: 1.8;
+            color: #24292e;
+            line-height: 1.7;
         }
 
         .summary {
             font-size: 13px;
-            color: #333;
-            text-align: justify;
-            line-height: 1.7;
+            color: #24292e;
+            line-height: 1.65;
         }
 
         .education-item {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .degree {
             font-weight: 600;
-            color: #000;
+            color: #0a0c10;
             font-size: 14px;
         }
 
         .school {
             font-size: 13px;
-            color: #666;
+            color: #586069;
         }
 
+        /* Mobile Adjustments */
+        @media (max-width: 640px) {
+            body {
+                padding: 12px 8px;
+            }
+
+            .container {
+                padding: 24px 18px;
+                box-shadow: none;
+            }
+
+            .name {
+                font-size: 24px;
+            }
+
+            .title {
+                font-size: 15px;
+            }
+
+            .cv-actions-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .cv-btn-group {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+        }
+
+        /* Print Media Styles */
         @media print {
             body {
-                background: white;
+                background: #ffffff;
                 padding: 0;
                 margin: 0;
+                color: #000000;
             }
+
             .container {
                 max-width: 100%;
                 box-shadow: none;
-                padding: 40px;
+                border: none;
+                padding: 15mm 15mm;
             }
+
             .no-print {
                 display: none !important;
+            }
+
+            a {
+                color: #000000;
+                text-decoration: none;
+            }
+
+            .section-title {
+                border-bottom-color: #cccccc;
+            }
+
+            .header {
+                border-bottom-color: #000000;
+            }
+
+            .item {
+                page-break-inside: avoid;
             }
         }
 
         @page {
-            margin: 0.5in;
+            margin: 10mm;
             size: letter;
-        }
-
-        @page :first {
-            margin-top: 0.5in;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Top Action Bar -->
-        <div class="no-print" style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; border-bottom: 1px solid #eee; padding-bottom: 12px;">
-            <a href="index.html" class="contact-link" style="display: inline-flex; align-items: center; gap: 4px;">← Back to Portfolio</a>
-            <button onclick="window.print()" style="background: #f8f9fa; border: 1px solid #ddd; padding: 6px 14px; border-radius: 6px; cursor: pointer; color: #333; font-size: 12px; font-weight: 500;">🖨️ Print / Save as PDF</button>
+        <div class="cv-actions-bar no-print">
+            <a href="index.html" class="cv-back-link">← Back to Portfolio</a>
+            <div class="cv-btn-group">
+                <a href="Osuolale_Quyum_CV.pdf" download="Osuolale_Quyum_CV.pdf" class="cv-btn cv-btn-primary">
+                    📥 Download PDF
+                </a>
+                <button onclick="window.print()" class="cv-btn">
+                    🖨️ Print CV
+                </button>
+            </div>
         </div>
 
         <!-- Header -->
         <div class="header">
             <div class="name">OSUOLALE QUYUM</div>
-            <div class="title">AI Engineer</div>
+            <div class="title">AI Systems &amp; Software Engineer</div>
             <div class="contact">
-                <div>Oyo State, Nigeria | <a href="mailto:kelightsub@gmail.com" class="contact-link">kelightsub@gmail.com</a></div>
-                <div>LinkedIn: <a href="https://linkedin.com/in/osuolale-quyum-068209133" class="contact-link">linkedin.com/in/osuolale-quyum-068209133</a> | GitHub: <a href="https://github.com/koredeve" class="contact-link">github.com/koredeve</a> | Portfolio: <a href="https://koredeve.github.io" class="contact-link">koredeve.github.io</a></div>
+                <div>Oyo State, Nigeria · <a href="mailto:kelightsub@gmail.com" class="contact-link">kelightsub@gmail.com</a></div>
+                <div>LinkedIn: <a href="https://linkedin.com/in/osuolale-quyum-068209133" target="_blank" rel="noopener noreferrer" class="contact-link">linkedin.com/in/osuolale-quyum-068209133</a> · GitHub: <a href="https://github.com/koredeve" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/koredeve</a> · Portfolio: <a href="https://koredeve.github.io" target="_blank" rel="noopener noreferrer" class="contact-link">koredeve.github.io</a></div>
             </div>
         </div>
 
         <!-- Professional Summary -->
         <div class="section">
             <div class="section-title">Professional Summary</div>
-            <p class="summary">AI Engineer specializing in building AI-powered applications and intelligent systems. Experienced in designing and deploying production applications using LLM integration, automation workflows, and data-driven analysis. Strong technical foundation with practical expertise in API integration, conversational AI, real-time data processing, and intelligent system architecture. Mathematics graduate with proven ability to solve complex problems through technology.</p>
+            <p class="summary">Mathematics graduate and software engineer specializing in AI-driven applications, automation workflows, and intelligent Web3 systems. Strong technical foundation in Python, JavaScript/TypeScript, LLM integration, and algorithmic problem-solving with practical experience building functional prototypes, developer tools, and verified decentralized protocols.</p>
         </div>
 
         <!-- Education -->
         <div class="section">
             <div class="section-title">Education</div>
             <div class="education-item">
-                <div class="degree">B.Sc. Mathematics, Second Class Upper</div>
-                <div class="school">Ladoke Akintola University of Technology (LAUTECH)</div>
-                <div class="school">2021 – 2025</div>
+                <div class="item-header">
+                    <div class="degree">B.Sc. Pure &amp; Applied Mathematics, Second Class Upper</div>
+                    <div class="item-date">2021 – 2025</div>
+                </div>
+                <div class="school">Ladoke Akintola University of Technology (LAUTECH) · Ogbomoso, Nigeria</div>
             </div>
         </div>
 
@@ -221,16 +353,16 @@
 
             <div class="item">
                 <div class="item-header">
-                    <div class="item-title">Self-Directed Development</div>
+                    <div class="item-title">Independent Software &amp; AI Development</div>
                     <div class="item-date">2024 – Present</div>
                 </div>
                 <div class="item-description">
                     <ul>
-                        <li>Designed and deployed multiple AI-powered applications in production</li>
-                        <li>Integrated LLM APIs (Open Router) for conversational AI and intelligent analysis</li>
-                        <li>Built automation workflows and data processing systems</li>
-                        <li>Implemented full-stack AI products from UI design to intelligent backend logic</li>
-                        <li>Deployed applications using GitHub and modern platforms (Vercel, Docker)</li>
+                        <li>Designed and developed interactive AI-powered applications, mathematical solvers, and arbitrage analysis tools</li>
+                        <li>Built decentralized escrow and governance protocols on GenLayer using Python GenVM intelligent contracts</li>
+                        <li>Implemented multi-model LLM vision and reasoning pipelines (Claude 3.5 Sonnet, GPT-4o, DeepSeek) via OpenRouter and Google AI Studio</li>
+                        <li>Constructed automated content processing workflows in Python using FFmpeg, YouTube API v3, and scheduled execution</li>
+                        <li>Built responsive, accessible web interfaces and state machines using Next.js, React, and Vite</li>
                     </ul>
                 </div>
             </div>
@@ -242,9 +374,9 @@
                 </div>
                 <div class="item-description">
                     <ul>
-                        <li>Developed responsive web applications using HTML, CSS, and JavaScript</li>
-                        <li>Applied front-end development principles through practical projects</li>
-                        <li>Collaborated on technical problem-solving and debugging</li>
+                        <li>Developed responsive web interfaces using semantic HTML5, CSS3, and modern JavaScript</li>
+                        <li>Applied frontend engineering principles, DOM manipulation techniques, and cross-browser debugging</li>
+                        <li>Collaborated with peers on technical problem-solving, code reviews, and software project delivery</li>
                     </ul>
                 </div>
             </div>
@@ -255,52 +387,93 @@
             <div class="section-title">Projects</div>
 
             <div class="item">
-                <div class="item-title">ImpactVault <span style="color: #666; font-weight: normal;">| impact-vault-tau.vercel.app</span></div>
+                <div class="item-header">
+                    <div class="item-title">ImpactVault Protocol</div>
+                    <div class="item-date"><a href="https://impact-vault-tau.vercel.app" target="_blank" rel="noopener noreferrer" class="contact-link">impact-vault-tau.vercel.app</a> · <a href="https://github.com/koredeve/impact-vault" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/koredeve/impact-vault</a></div>
+                </div>
                 <div class="item-description">
                     <ul>
                         <li>Milestone-gated DAO grant and crowdfunding protocol built on GenLayer Intelligent Contracts</li>
-                        <li>Utilizes AI validators to independently inspect live web evidence and reach consensus on deliverable criteria before unlocking tranches</li>
-                        <li>Full-stack Web3 DApp with browser wallet injection (MetaMask/Rabby), EIP-3085 network switching, and pro-rata refund mechanisms</li>
+                        <li>Tranche fund releases gated on verified deliverable criteria with pro-rata contributor refund protection</li>
+                        <li>Full-stack Web3 DApp with browser wallet injection (MetaMask/Rabby), EIP-3085 network switching, and 13 unit tests</li>
                     </ul>
                 </div>
             </div>
 
             <div class="item">
-                <div class="item-title">WorkProof Protocol <span style="color: #666; font-weight: normal;">| github.com/koredeve/workproof</span></div>
+                <div class="item-header">
+                    <div class="item-title">WorkProof Protocol</div>
+                    <div class="item-date"><a href="https://workproof-gamma.vercel.app" target="_blank" rel="noopener noreferrer" class="contact-link">workproof-gamma.vercel.app</a> · <a href="https://github.com/koredeve/workproof" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/koredeve/workproof</a></div>
+                </div>
                 <div class="item-description">
                     <ul>
-                        <li>Trustless freelance settlement and work verification protocol on GenLayer</li>
-                        <li>Automated consensus validation retrieving live evidence to score acceptance criteria and settle escrow</li>
-                        <li>Integrated EIP-6963 multi-wallet connector, state machine contracts in Python/GenVM, and full test suite</li>
+                        <li>Trustless freelance work verification and milestone settlement protocol on GenLayer</li>
+                        <li>Automated consensus validation scoring acceptance criteria before escrow releases</li>
+                        <li>Integrated EIP-6963 multi-wallet connector, state machine contracts in Python GenVM, and 44-test verification suite</li>
                     </ul>
                 </div>
             </div>
 
             <div class="item">
-                <div class="item-title">DeltaPerp Arbitrage Terminal <span style="color: #666; font-weight: normal;">| deltaperp.ai.studio</span></div>
+                <div class="item-header">
+                    <div class="item-title">SignalAI Chart Analysis Engine</div>
+                    <div class="item-date"><a href="https://signalai-kappa.vercel.app" target="_blank" rel="noopener noreferrer" class="contact-link">signalai-kappa.vercel.app</a> · <a href="https://github.com/koredeve/SignalAi" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/koredeve/SignalAi</a></div>
+                </div>
                 <div class="item-description">
                     <ul>
-                        <li>Perpetual DEX funding rate & basis arbitrage scanner and net cash-and-carry yield calculator</li>
-                        <li>Deterministic execution playbook without AI hallucination, processing real-time DEX and funding metrics</li>
+                        <li>Multi-model vision analysis platform comparing financial chart setups across Claude 3.5 Sonnet, GPT-4o, and DeepSeek</li>
+                        <li>Orchestrates multi-model prompts, extracts structured technical bias, and renders comparative candlestick analysis</li>
                     </ul>
                 </div>
             </div>
 
             <div class="item">
-                <div class="item-title">FORGE Ecosystem (Him &amp; Her) <span style="color: #666; font-weight: normal;">| forgehim.vercel.app &amp; forgeher.vercel.app</span></div>
+                <div class="item-header">
+                    <div class="item-title">DeltaPerp Arbitrage Terminal</div>
+                    <div class="item-date"><a href="https://deltaperp.ai.studio" target="_blank" rel="noopener noreferrer" class="contact-link">deltaperp.ai.studio</a></div>
+                </div>
                 <div class="item-description">
                     <ul>
-                        <li>Calisthenics and targeted feminine biomechanics progressive training platforms built on Next.js & React</li>
-                        <li>Features real-time workout players, interactive skill trees, custom routine builders, and AI coach assistants</li>
+                        <li>Perpetual DEX funding rate &amp; basis arbitrage scanner and net cash-and-carry yield calculator</li>
+                        <li>Implements deterministic formulas factoring in borrow costs, funding cycles, and delta-neutral execution playbooks</li>
                     </ul>
                 </div>
             </div>
 
             <div class="item">
-                <div class="item-title">YouTube Content Automation Pipeline <span style="color: #666; font-weight: normal;">| Python &amp; Automation</span></div>
+                <div class="item-header">
+                    <div class="item-title">FORGE Suite (Him &amp; Her)</div>
+                    <div class="item-date"><a href="https://forgehim.vercel.app" target="_blank" rel="noopener noreferrer" class="contact-link">forgehim.vercel.app</a> · <a href="https://github.com/koredeve/forge-fitness" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/koredeve/forge-fitness</a></div>
+                </div>
                 <div class="item-description">
                     <ul>
-                        <li>Autonomous multi-channel publishing system handling real-time content scheduling, processing workflows, and automated deployment</li>
+                        <li>Calisthenics and targeted biomechanics progressive training platforms built on Next.js &amp; React</li>
+                        <li>Features guided workout players, interactive exercise skill trees, and custom routine builders</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <div class="item-title">YouTube Automation Engine</div>
+                    <div class="item-date">Python &amp; Automation CLI</div>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>Autonomous multi-channel publishing system handling content scheduling, batch media rendering, and scheduled deployment in Python using FFmpeg and YouTube API v3</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <div class="item-title">MathSolverBot &amp; Car LandedIQ</div>
+                    <div class="item-date"><a href="https://mathsolverbot.vercel.app" target="_blank" rel="noopener noreferrer" class="contact-link">mathsolverbot.vercel.app</a> · <a href="https://github.com/koredeve/math-solver" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/koredeve/math-solver</a></div>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>Conversational mathematics solver providing step-by-step reasoning via OpenRouter API, Marked.js, and MathJax</li>
+                        <li>Nigerian customs duty landed cost bidding calculator with real tariff formulas</li>
                     </ul>
                 </div>
             </div>
@@ -309,7 +482,12 @@
         <!-- Technical Skills -->
         <div class="section">
             <div class="section-title">Technical Skills</div>
-            <div class="skills">Python, JavaScript, TypeScript, Next.js, React, LLM Integration (OpenRouter, Claude API, GPT-4o), Google AI Studio, GenLayer Intelligent Contracts, Arbitrage &amp; Data Systems, REST APIs, Automation Workflows, Docker, Git, Vercel</div>
+            <div class="skills">
+                <strong>Languages:</strong> Python, JavaScript, TypeScript, SQL, HTML5, CSS3<br>
+                <strong>AI &amp; Smart Contracts:</strong> GenLayer Intelligent Contracts (Python GenVM), LLM Integration (OpenRouter, Claude API, GPT-4o), Google AI Studio, Multi-Model Vision<br>
+                <strong>Frontend &amp; Frameworks:</strong> Next.js, React, Vite, Tailwind CSS, Canvas API, Web Audio API<br>
+                <strong>Tools &amp; Infrastructure:</strong> Git, GitHub Actions, Docker, Vercel, Firebase, FFmpeg, REST APIs
+            </div>
         </div>
     </div>
 </body>
