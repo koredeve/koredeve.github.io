@@ -3,8 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Osuolale Quyum — Curriculum Vitae</title>
+
+    <script>
+      (function() {
+        try {
+          const saved = localStorage.getItem('koredeve-theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = saved || (prefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
+
     <style>
+        :root {
+            color-scheme: light dark;
+            --cv-bg: #f6f8fa;
+            --cv-card: #ffffff;
+            --cv-text: #24292e;
+            --cv-text-strong: #0a0c10;
+            --cv-text-muted: #586069;
+            --cv-border: #e1e4e8;
+            --cv-primary: #0366d6;
+            --cv-primary-hover: #0255b5;
+            --cv-btn-bg: #f6f8fa;
+            --cv-btn-border: #d1d5da;
+            --cv-btn-hover-bg: #eef2f5;
+            --cv-btn-hover-border: #b9bec5;
+        }
+
+        [data-theme="dark"] {
+            color-scheme: dark;
+            --cv-bg: #0c0f0d;
+            --cv-card: #131715;
+            --cv-text: #d8dadf;
+            --cv-text-strong: #f0eee6;
+            --cv-text-muted: #8b948d;
+            --cv-border: #222a25;
+            --cv-primary: #58a6ff;
+            --cv-primary-hover: #79c0ff;
+            --cv-btn-bg: #1c211e;
+            --cv-btn-border: #2c3630;
+            --cv-btn-hover-bg: #262e29;
+            --cv-btn-hover-border: #3d4a42;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                color-scheme: dark;
+                --cv-bg: #0c0f0d;
+                --cv-card: #131715;
+                --cv-text: #d8dadf;
+                --cv-text-strong: #f0eee6;
+                --cv-text-muted: #8b948d;
+                --cv-border: #222a25;
+                --cv-primary: #58a6ff;
+                --cv-primary-hover: #79c0ff;
+                --cv-btn-bg: #1c211e;
+                --cv-btn-border: #2c3630;
+                --cv-btn-hover-bg: #262e29;
+                --cv-btn-hover-border: #3d4a42;
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,19 +77,21 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.55;
-            color: #24292e;
-            background: #f6f8fa;
+            color: var(--cv-text);
+            background: var(--cv-bg);
             padding: 24px 16px;
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
 
         .container {
             max-width: 860px;
             margin: 0 auto;
-            background: #ffffff;
+            background: var(--cv-card);
             padding: 48px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e1e4e8;
+            border: 1px solid var(--cv-border);
+            transition: background-color 0.2s ease, border-color 0.2s ease;
         }
 
         /* Top Action Bar */
@@ -37,12 +102,12 @@
             gap: 12px;
             margin-bottom: 32px;
             padding-bottom: 16px;
-            border-bottom: 1px solid #e1e4e8;
+            border-bottom: 1px solid var(--cv-border);
             flex-wrap: wrap;
         }
 
         .cv-back-link {
-            color: #0366d6;
+            color: var(--cv-primary);
             text-decoration: none;
             font-size: 13px;
             font-weight: 500;
@@ -65,9 +130,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #f6f8fa;
-            color: #24292e;
-            border: 1px solid #d1d5da;
+            background: var(--cv-btn-bg);
+            color: var(--cv-text);
+            border: 1px solid var(--cv-btn-border);
             padding: 7px 14px;
             border-radius: 6px;
             font-size: 13px;
@@ -78,25 +143,35 @@
         }
 
         .cv-btn:hover {
-            background: #eef2f5;
-            border-color: #b9bec5;
+            background: var(--cv-btn-hover-bg);
+            border-color: var(--cv-btn-hover-border);
+        }
+
+        #cvThemeIcon {
+            display: inline-block;
+            transition: transform 0.25s ease;
+        }
+
+        [data-theme="dark"] #cvThemeIcon {
+            transform: rotate(180deg);
+            color: #58a6ff;
         }
 
         .cv-btn-primary {
-            background: #0366d6;
+            background: var(--cv-primary);
             color: #ffffff;
-            border-color: #0366d6;
+            border-color: var(--cv-primary);
         }
 
         .cv-btn-primary:hover {
-            background: #0255b5;
-            border-color: #0255b5;
+            background: var(--cv-primary-hover);
+            border-color: var(--cv-primary-hover);
             color: #ffffff;
         }
 
         /* Header */
         .header {
-            border-bottom: 2px solid #0366d6;
+            border-bottom: 2px solid var(--cv-primary);
             padding-bottom: 20px;
             margin-bottom: 24px;
         }
@@ -104,26 +179,26 @@
         .name {
             font-size: 30px;
             font-weight: 700;
-            color: #0a0c10;
+            color: var(--cv-text-strong);
             letter-spacing: -0.5px;
             margin-bottom: 4px;
         }
 
         .title {
             font-size: 17px;
-            color: #0366d6;
+            color: var(--cv-primary);
             margin-bottom: 10px;
             font-weight: 600;
         }
 
         .contact {
             font-size: 13px;
-            color: #586069;
+            color: var(--cv-text-muted);
             line-height: 1.6;
         }
 
         .contact-link {
-            color: #0366d6;
+            color: var(--cv-primary);
             text-decoration: none;
         }
 
@@ -139,8 +214,8 @@
         .section-title {
             font-size: 14px;
             font-weight: 700;
-            color: #0a0c10;
-            border-bottom: 1px solid #e1e4e8;
+            color: var(--cv-text-strong);
+            border-bottom: 1px solid var(--cv-border);
             padding-bottom: 6px;
             margin-bottom: 12px;
             text-transform: uppercase;
@@ -160,19 +235,19 @@
 
         .item-title {
             font-weight: 600;
-            color: #0a0c10;
+            color: var(--cv-text-strong);
             font-size: 14px;
         }
 
         .item-date {
             font-size: 12.5px;
-            color: #6a737d;
+            color: var(--cv-text-muted);
             font-style: italic;
         }
 
         .item-description {
             font-size: 13px;
-            color: #24292e;
+            color: var(--cv-text);
         }
 
         .item-description ul {
@@ -191,19 +266,19 @@
             content: "•";
             position: absolute;
             left: 2px;
-            color: #0366d6;
+            color: var(--cv-primary);
             font-weight: bold;
         }
 
         .skills {
             font-size: 13px;
-            color: #24292e;
+            color: var(--cv-text);
             line-height: 1.7;
         }
 
         .summary {
             font-size: 13px;
-            color: #24292e;
+            color: var(--cv-text);
             line-height: 1.65;
         }
 
@@ -213,13 +288,13 @@
 
         .degree {
             font-weight: 600;
-            color: #0a0c10;
+            color: var(--cv-text-strong);
             font-size: 14px;
         }
 
         .school {
             font-size: 13px;
-            color: #586069;
+            color: var(--cv-text-muted);
         }
 
         /* Mobile Adjustments */
@@ -262,19 +337,24 @@
 
         /* Print Media Styles */
         @media print {
+            * {
+                color-scheme: light !important;
+            }
+
             body {
-                background: #ffffff;
+                background: #ffffff !important;
                 padding: 0;
                 margin: 0;
-                color: #000000;
+                color: #000000 !important;
                 font-size: 8.8pt;
                 line-height: 1.28;
             }
 
             .container {
                 max-width: 100%;
-                box-shadow: none;
-                border: none;
+                background: #ffffff !important;
+                box-shadow: none !important;
+                border: none !important;
                 padding: 0;
                 margin: 0;
             }
@@ -284,7 +364,7 @@
             }
 
             a {
-                color: #000000;
+                color: #000000 !important;
                 text-decoration: none;
             }
 
@@ -293,7 +373,8 @@
             }
 
             .section-title {
-                border-bottom: 1px solid #111111;
+                color: #000000 !important;
+                border-bottom: 1px solid #111111 !important;
                 font-size: 9pt;
                 margin-bottom: 4px;
                 padding-bottom: 1px;
@@ -302,27 +383,35 @@
             }
 
             .header {
-                border-bottom: 2px solid #000000;
+                border-bottom: 2px solid #000000 !important;
                 padding-bottom: 4px;
                 margin-bottom: 6px;
             }
 
             .header .name {
+                color: #000000 !important;
                 font-size: 16pt;
                 letter-spacing: -0.02em;
             }
 
             .header .title {
+                color: #000000 !important;
                 font-size: 10pt;
                 margin: 2px 0;
             }
 
             .header .contact {
+                color: #333333 !important;
                 font-size: 8pt;
                 gap: 2px;
             }
 
+            .contact-link {
+                color: #000000 !important;
+            }
+
             .summary {
+                color: #000000 !important;
                 font-size: 8.5pt;
                 line-height: 1.3;
             }
@@ -338,11 +427,25 @@
             }
 
             .item-title {
+                color: #000000 !important;
                 font-size: 9pt;
             }
 
             .item-date {
+                color: #333333 !important;
                 font-size: 8pt;
+            }
+
+            .degree {
+                color: #000000 !important;
+            }
+
+            .school {
+                color: #333333 !important;
+            }
+
+            .item-description {
+                color: #000000 !important;
             }
 
             .item-description ul {
@@ -355,7 +458,12 @@
                 line-height: 1.25;
             }
 
+            .item-description li::before {
+                color: #000000 !important;
+            }
+
             .skills {
+                color: #000000 !important;
                 font-size: 8.2pt;
                 line-height: 1.35;
             }
@@ -378,6 +486,10 @@
                 </a>
                 <button onclick="window.print()" class="cv-btn">
                     🖨️ Print CV
+                </button>
+                <button type="button" id="cvThemeToggle" class="cv-btn" aria-label="Toggle color theme" title="Toggle color theme">
+                    <span id="cvThemeIcon" aria-hidden="true">◐</span>
+                    <span id="cvThemeLabel">Theme</span>
                 </button>
             </div>
         </div>
@@ -550,5 +662,48 @@
             </div>
         </div>
     </div>
+
+    <script>
+      (function initCvTheme() {
+        const toggleBtn = document.getElementById('cvThemeToggle');
+        if (!toggleBtn) return;
+
+        function getPreferredTheme() {
+          const saved = localStorage.getItem('koredeve-theme');
+          if (saved === 'dark' || saved === 'light') return saved;
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          try {
+            localStorage.setItem('koredeve-theme', theme);
+          } catch (e) {}
+
+          const metaScheme = document.querySelector('meta[name="color-scheme"]');
+          if (metaScheme) metaScheme.content = theme;
+
+          toggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+          toggleBtn.title = theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme';
+        }
+
+        const currentTheme = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+        applyTheme(currentTheme);
+
+        toggleBtn.addEventListener('click', () => {
+          const active = document.documentElement.getAttribute('data-theme') || getPreferredTheme();
+          const next = active === 'dark' ? 'light' : 'dark';
+          applyTheme(next);
+        });
+
+        try {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('koredeve-theme')) {
+              applyTheme(e.matches ? 'dark' : 'light');
+            }
+          });
+        } catch (e) {}
+      })();
+    </script>
 </body>
 </html>
