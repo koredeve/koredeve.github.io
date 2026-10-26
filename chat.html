@@ -447,6 +447,7 @@
                 </div>
             </div>
             <div class="header-actions">
+                <a href="index.html" class="reset-btn" style="text-decoration: none; display: inline-flex; align-items: center;" title="Return to portfolio homepage">← Portfolio</a>
                 <button class="reset-btn" onclick="resetConversation()" title="Reset conversation">↺ Reset</button>
                 <button class="close-btn" onclick="closeChat()" title="Close chat" aria-label="Close">✕</button>
             </div>
@@ -578,14 +579,19 @@
                 return KNOWLEDGE_BASE.projects.mathsolver;
             }
 
-            // 2. Broad Projects
-            if (q.includes("project") || q.includes("built") || q.includes("portfolio") || q.includes("what has he made") || q.includes("applications") || q.includes("explore projects")) {
+            // 2. Engineering Approach / Workshop Philosophy
+            if (q.includes("how do you build") || q.includes("how does he build") || q.includes("how you build") || q.includes("approach") || q.includes("unique") || q.includes("philosoph") || q.includes("method") || q.includes("workshop") || q.includes("reality check")) {
+                return `<p>${KNOWLEDGE_BASE.approach.summary}</p>`;
+            }
+
+            // 3. Broad Projects List
+            if (q.includes("project") || q.includes("built") || q.includes("build") || q.includes("made") || q.includes("portfolio") || q.includes("applications") || q.includes("explore projects")) {
                 return `<p>Here is a breakdown of verified projects built by Osuolale:</p><ul>` + 
                     KNOWLEDGE_BASE.projects.all.map(item => `<li>${item}</li>`).join('') + 
                     `</ul><p style='margin-top:8px;'>You can ask me for deep dives into any specific project (e.g. <em>"Tell me about WorkProof"</em> or <em>"Explain DeltaPerp"</em>).</p>`;
             }
 
-            // 3. Technical Skills & Stack
+            // 4. Technical Skills & Stack
             if (q.includes("skill") || q.includes("stack") || q.includes("technolog") || q.includes("language") || q.includes("python") || q.includes("framework") || q.includes("tool")) {
                 return `<p>${KNOWLEDGE_BASE.skills.summary}</p><ul>` + 
                     KNOWLEDGE_BASE.skills.categories.map(c => `<li>${c}</li>`).join('') + 
